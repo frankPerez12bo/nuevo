@@ -1,0 +1,56 @@
+*{
+    background-color:transparent;
+}
+#textFooter{
+    transition:2100ms ease-out;
+}
+#textFooter:hover h4{
+    color: beige;
+    cursor: pointer;
+    transition:1800ms;
+    transform: translate3d(/* stylelint-disable-line rule */);
+}
+#template_main{
+    opacity: 100%;
+    border: 2px solid slateblue;
+    background-image:url("https://images.playground.com/f5859aa6fe364957903202a761f836fd.jpeg");
+    transition: ease-in 1000ms;
+    overflow:cover;
+    height: 80vh;
+    background-size: cover;
+    box-sizing: border-box;
+    animation: imageOne 105s linear infinite alternate;
+}
+#template_main:hover{
+    transition: ease-in 1000ms;
+    filter: brightness(110%);
+    animation-play-state: paused;
+}
+#template_main h1{
+    opacity: 75%;
+    letter-spacing: .7vw;
+}
+#template_main p{
+    opacity:50%;
+}
+@keyframes imageOne {
+    0%{
+        background-size: cover; 
+        background-image:url("https://images.playground.com/f5859aa6fe364957903202a761f836fd.jpeg");
+    }
+    20%{
+        background-size: cover;
+        background-image: url("https://images.playground.com/21d745df58ff457aa3fcf38eebf75b5d.jpeg");
+    }
+    50%{
+        background-size: cover; 
+        background-image: url("https://images.playground.com/25a2b36b8b564adc9d3219fe5e4f71ab.jpeg");
+    }
+    80%{
+        background-size: cover;
+        background-image: url("https://images.playground.com/6aa7213389ce463d9123689e56e15e47.jpeg");
+    }
+}
+body{
+    background-color: rgba(0, 0, 0, .7);
+}

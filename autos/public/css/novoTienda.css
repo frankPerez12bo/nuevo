@@ -1,0 +1,23 @@
+body{
+    background-color: rgba(0, 0, 0, .3);
+}
+#space{
+    display: grid;
+    grid-template-columns: (1fr 1fr 1fr); 
+}
+#main{
+}
+#containerMain{
+    width: 20vw;
+    display: block;
+    padding: 01vw;
+}
+#nombre{
+    background-color:#000;
+    color: beige;
+    text-align: center;
+    padding: .8vw;
+}
+/*p{
+    background-color:#000;
+}*/
