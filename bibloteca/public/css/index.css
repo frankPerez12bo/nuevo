@@ -1,0 +1,53 @@
+*{
+    background-color:transparent;
+}
+#textFooter{
+    transition:2100ms ease-out;
+}
+#textFooter:hover h4{
+    color: beige;
+    cursor: pointer;
+    transition:1800ms;
+    transform: translate3d(/* stylelint-disable-line rule */);
+}
+#template_main{
+    opacity: 100%;
+    border: 2px solid slateblue;
+    background-image:url("https://images.playground.com/263d2cbfa2074b85a3918f19453df02f.jpeg");
+    background-size: cover;
+    transition: ease-in 1000ms;
+    animation: imageOne 25s linear infinite alternate;
+}
+#template_main:hover{
+    transition: ease-in 1000ms;
+    filter: brightness(110%);
+    animation-play-state: paused;
+}
+#template_main h1{
+    opacity: 75%;
+    letter-spacing: .7vw;
+}
+#template_main p{
+    opacity:50%;
+}
+@keyframes imageOne {
+    0%{
+        background-size: cover; 
+        background-image:url("https://images.playground.com/263d2cbfa2074b85a3918f19453df02f.jpeg");
+    }
+    20%{
+        background-size: cover;
+        background-image: url("https://images.playground.com/aff02aef598c4b60a763a96e53bc034f.jpeg");
+    }
+    50%{
+        background-size: cover; 
+        background-image: url("https://images.playground.com/ac83e6f37263463380d6457349f7823e.jpeg");
+    }
+    80%{
+        background-size: cover;
+        background-image: url("https://images.playground.com/fec646267ec444319d4d38da72ec4cf1.jpeg");
+    }
+}
+body{
+    background-color: rgba(0, 0, 0, .7);
+}
