@@ -31,6 +31,7 @@
         $egreso = $copy['egreso'];
         $fecha = $copy['fecha'];
         $cant_total_ingreso = $copy['cant_total_ingreso'];
+        $provedor = $copy['provedor'];
     }
 
 
@@ -98,6 +99,7 @@
 
         $fecha = (isset($_POST['fecha'])? $_POST['fecha']: '');
         $cant_total_ingreso = (isset($_POST['cant_total_ingreso'])? $_POST['cant_total_ingreso']: '');
+        $provedor = (isset($_POST['provedor'])? $_POST['provedor']:'');
 
         $sql = "UPDATE tb_libreria
 
@@ -113,7 +115,8 @@
                     ingreso=:ingreso,
                     egreso=:egreso,
                     fecha=:fecha,
-                    cant_total_ingreso=:cant_total_ingreso
+                    cant_total_ingreso=:cant_total_ingreso,
+                    provedor=:provedor
                     WHERE id=:id";
 
         $sentencia = $pdo->prepare($sql);
@@ -142,6 +145,7 @@
         $sentencia->bindParam(':egreso',$result_egreso);
         $sentencia->bindParam(':fecha',$fecha);
         $sentencia->bindParam(':cant_total_ingreso',$new_cant_ingreso_inven);
+        $sentencia->bindParam(':provedor',$provedor);
 
         $sentencia->execute();
         header("location:ingresoMain.php");
@@ -209,6 +213,20 @@
                             placeholder="Cantidad en Inventario"
                         />
                     </div>
+                    <div class="mb-3">
+                        <label for="provedor" class="form-label bg-success py-2"><b>Provedor</b></label>
+                        <input
+                            type="text"
+                            value="<?php echo $provedor;?>"
+                            readonly
+                            class="form-control"
+                            name="provedor"
+                            id="provedor"
+                            aria-describedby="helpId"
+                            placeholder="Provedor"
+                        />
+                    </div>
+                    
                     <div class="mb-3">
                         <label for="cant_ingreso_inven" class="form-label bg-dark text-white"><b>Cantidad ingreso Productos/Inventario</b></label>
                         <input
@@ -289,10 +307,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>
+                        <!--<label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             min="0"
                             max="1000000"
                             readonly
@@ -305,10 +324,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>
+                        <!--<label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -321,9 +341,10 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>
+                        <!--<label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
                             readonly
                             min="0"
@@ -366,3 +387,13 @@
     </article>
 </section>
 <?php include("../../../temp/footer.php"); ?>
+<script>
+    document.querySelector('form').addEventListener('submit', (e)=>{
+        let provedor = document.getElementById('provedor').value.trim();
+        let cant_ingreso_inven = document.getElementById('cant_ingreso_inven').value.trim();
+        if(provedor == '' || cant_ingreso_inven == ''){
+            alert("rellene los campos provedor,y cantidad de ingreso a inventario.");
+            e.preventDefault();
+        }
+    })
+</script>

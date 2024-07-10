@@ -46,5 +46,33 @@
                 });
             });
         </script>
+        <script>
+            $(document).ready(function() {
+                $('#libroMain').DataTable({
+                    pageLength:50,
+                    lengthMenu :[
+                    [3,5,10,50,100],
+                    [3,5,10,50,100]
+                ],
+                        language:{
+                            url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json",
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#tabla_provedores').DataTable({
+                    pageLength:50,
+                    lengthMenu :[
+                    [3,5,10,50,100],
+                    [3,5,10,50,100]
+                ],
+                        language:{
+                            url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json",
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

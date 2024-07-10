@@ -38,6 +38,8 @@ if (isset($_GET['txtId'])) {
     $egreso = $copy['egreso'];
     $fecha = $copy['fecha'];
     $cant_comprar_bifor = $copy['cant_comprar_bifor'];
+
+    $cliente = $copy['cliente'];
 }
 
 if ($_POST) {
@@ -95,6 +97,8 @@ if ($_POST) {
     $fecha = (isset($_POST['fecha'])? $_POST['fecha']: '');
     $cant_comprar_bifor = (isset($_POST['cant_comprar_bifor'])? $_POST['cant_comprar_bifor']: '');
 
+    $cliente = (isset($_POST['cliente'])? $_POST['cliente']: '');
+
 
     $sql = "UPDATE tb_libreria
             SET producto=:producto,
@@ -111,7 +115,8 @@ if ($_POST) {
             ingreso=:ingreso,
             egreso=:egreso,
             fecha=:fecha,
-            cant_comprar_bifor=:cant_comprar_bifor
+            cant_comprar_bifor=:cant_comprar_bifor,
+            cliente=:cliente
             WHERE id=:id";
     $sentencia = $pdo->prepare($sql);
 
@@ -136,6 +141,7 @@ if ($_POST) {
     $sentencia->bindParam(':egreso',$egreso);
     $sentencia->bindParam(':fecha',$fecha);
     $sentencia->bindParam(':cant_comprar_bifor',$cantidad_comprar);
+    $sentencia->bindParam(':cliente',$cliente);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -153,7 +159,7 @@ if ($_POST) {
                 <a
                     name=""
                     id=""
-                    class="btn btn-info"
+                    class="btn btn-warning"
                     href="ingresoMain.php"
                     role="button"
                     >Ver Registro</a
@@ -161,9 +167,13 @@ if ($_POST) {
                 
             </div>
             <div class="card-body">
+                
                 <form action="" method="post" enctype="multipart/form-data">
+                    <!--<label for="dni">Insertar numero de Dni:</label>
+                    <input type="text" name="dni" id="dni" placeholder="Insertar numero de Dni:">
+                    <button id="boton">...</button>-->
                     <div class="mb-3">
-                        <label for="txtId" class="form-label">ID:</label>
+                        <label for="txtId" class="form-label"><b>ID:</b></label>
                         <input
                             type="text"
                             readonly
@@ -237,7 +247,7 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_venta" class="form-label">Precio Unidad Venta</label>
+                        <label for="precio_unid_venta" class="form-label bg-success py-2"><b>Precio Unidad Venta</b></label>
                         <input
                             step="0.01"
                             type="number"
@@ -252,8 +262,21 @@ if ($_POST) {
                             placeholder="Precio Unidad Venta"
                         />
                     </div>
+
                     <div class="mb-3">
-                        <label for="cantidad_comprar" class="form-label bg-dark text-white"><b>Cantidad a Comprar</b></label>
+                        <label for="cliente" class="form-label bg-dark text-white py-2"><b>Nombre del Cliente</b></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="cliente"
+                            id="cliente"
+                            aria-describedby="helpId"
+                            placeholder="Nombre del cliente:"
+                        />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="cantidad_comprar" class="form-label bg-dark text-white py-2"><b>Cantidad a Comprar</b></label>
                         <input
                             type="number"
                             class="form-control"
@@ -267,10 +290,11 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_venta" class="form-label bg-dark text-white"><b>Precio Total Venta</b></label>
+                        <!--<label for="precio_total_venta" class="form-label bg-dark text-white py-2"><b>Precio Total Venta</b></label>-->
                         <input
                             step="0.01"
                             readonly
+                            hidden
                             min="0"
                             max="1000000"
                             type="number"
@@ -283,9 +307,10 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>
+                        <!--<label for="precio_total_inven" class="form-label bg-dark text-white py-2"><b>Precio Total Inventario</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
                             min="0"
                             max="1000000"
@@ -299,10 +324,11 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>
+                        <!--<label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -315,9 +341,10 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>
+                        <!--<label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
                             readonly
                             min="0"
@@ -345,9 +372,11 @@ if ($_POST) {
                     </div>
                     <button
                         type="submit"
-                        class="btn btn-success"
+                        style="transform: translateX(10vw);"
+                        class="btn btn-info py-3"
+                        id="boton"
                     >
-                        Enviar
+                        <b>Enviar</b>
                     </button>
                     
                 </form>
@@ -359,4 +388,17 @@ if ($_POST) {
 
     </article>
 </section>
+<script>
+    document.querySelector('form').addEventListener('submit',(e)=>{
+        const cliente = document.getElementById('cliente').value.trim();
+        const cantidad_comprar = document.getElementById('cantidad_comprar').value.trim();
+        if(cliente == '' || cantidad_comprar == ''){
+            alert('rellene el campo cliente ,rellene el campo la cantidad de la compra');
+            e.preventDefault();
+
+        }
+    });
+</script>
+
 <?php include("../../../temp/footer.php"); ?>
+<script src="../../../public/js/nuevoDni.js"></script>
