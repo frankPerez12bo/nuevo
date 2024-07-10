@@ -1,0 +1,21 @@
+#sectionMain{
+    background-color:rgba(0,0,0,0.3);
+    gap: 2vw;
+}
+#sectionMain p{
+    background-color:rgba(0,0,0,0.5);
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0px 04px 04px beige;
+}
+#article_main{
+    right: 0;
+    top: 04vh;
+    background:steelblue;
+    opacity: 95%;
+}
+#btn_cotizar{
+    margin-left:07vw;
+}
+#space{
+}

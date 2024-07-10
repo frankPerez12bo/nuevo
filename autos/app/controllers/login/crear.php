@@ -13,6 +13,7 @@ if($_POST){
     $ingreso = (isset($_POST['ingreso'])? $_POST['ingreso']:'');
     $egreso = (isset($_POST['egreso'])? $_POST['egreso']:'');
     $fecha = (isset($_POST['fecha'])? $_POST['fecha']:'');
+    $provedor = (isset($_POST['provedor'])?$_POST['provedor']:'');
 
     $sql = "INSERT INTO tb_libreria(id,
                                     producto,
@@ -25,7 +26,8 @@ if($_POST){
                                     precio_total_inven,
                                     ingreso,
                                     egreso,
-                                    fecha)
+                                    fecha,
+                                    provedor)
             VALUES(null,:producto,
                                     :cantidad_inventario,
                                     :cant_ingreso_inven,
@@ -36,7 +38,8 @@ if($_POST){
                                     :precio_total_inven,
                                     :ingreso,
                                     :egreso,
-                                    :fecha)";
+                                    :fecha,
+                                    :provedor)";
 
     $sentencia = $pdo->prepare($sql);
 
@@ -52,7 +55,7 @@ if($_POST){
     $sentencia->bindParam(':ingreso',$ingreso);
     $sentencia->bindParam(':egreso',$egreso);
     $sentencia->bindParam(':fecha',$fecha);
-
+    $sentencia->bindParam(':provedor',$provedor);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -79,7 +82,7 @@ if($_POST){
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="producto" class="form-label">Nombre del Producto:</label>
+                        <label for="producto" class="form-label bg-dark text-white py-2"><b>Nombre del Producto:</b></label>
                         <input
                             type="text"
                             class="form-control"
@@ -90,7 +93,19 @@ if($_POST){
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label">Cantidad en Inventario</label>
+                        <label for="provedor" class="form-label bg-success py-2"><b>Provedor:</b></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="provedor"
+                            id="provedor"
+                            aria-describedby="helpId"
+                            placeholder="Provedor:"
+                        />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="cantidad_inventario" class="form-label bg-dark text-white py-2"><b>Cantidad en Inventario</b></label>
                         <input
                             type="number"
                             class="form-control"
@@ -114,7 +129,7 @@ if($_POST){
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_inven" class="form-label">Precio Unidad Inventario</label>
+                        <label for="precio_unid_inven" class="form-label bg-dark text-white py-2"><b>Precio Unidad Inventario</b></label>
                         <input
                             step="0.01"
                             type="number"
@@ -126,7 +141,7 @@ if($_POST){
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_venta" class="form-label">Precio Unidad Venta</label>
+                        <label for="precio_unid_venta" class="form-label bg-dark text-white py-2"><b>Precio Unidad Venta</b></label>
                         <input
                             step="0.01"
                             type="number"

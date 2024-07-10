@@ -31,6 +31,7 @@
         $egreso = $copy['egreso'];
         $fecha = $copy['fecha'];
         $cant_total_ingreso = $copy['cant_total_ingreso'];
+        $provedor = $copy['provedor'];
     }
 
 
@@ -98,6 +99,7 @@
 
         $fecha = (isset($_POST['fecha'])? $_POST['fecha']: '');
         $cant_total_ingreso = (isset($_POST['cant_total_ingreso'])? $_POST['cant_total_ingreso']: '');
+        $provedor = (isset($_POST['provedor'])? $_POST['provedor']:'');
 
         $sql = "UPDATE tb_libreria
 
@@ -113,7 +115,8 @@
                     ingreso=:ingreso,
                     egreso=:egreso,
                     fecha=:fecha,
-                    cant_total_ingreso=:cant_total_ingreso
+                    cant_total_ingreso=:cant_total_ingreso,
+                    provedor=:provedor
                     WHERE id=:id";
 
         $sentencia = $pdo->prepare($sql);
@@ -142,6 +145,7 @@
         $sentencia->bindParam(':egreso',$result_egreso);
         $sentencia->bindParam(':fecha',$fecha);
         $sentencia->bindParam(':cant_total_ingreso',$new_cant_ingreso_inven);
+        $sentencia->bindParam(':provedor',$provedor);
 
         $sentencia->execute();
         header("location:ingresoMain.php");
@@ -149,7 +153,7 @@
 ?>
 <?php include("../../../temp/header.php"); ?>
 <span class="fluid text-center text-primary">
-    <h5 class="bg-dark py-4" style="letter-spacing: 01vw;">Ingreso de Productos a inventario</h5>
+    <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0A5290;color:#FFEB05;">Ingreso de Productos a inventario</h5>
 </span>
 <section class="row">
     <article class="col-sm-4 col-md-4 col-lg-4 border border-3 border-dark py-5">
@@ -195,7 +199,21 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label"><b>Cantidad en Inventario</b></label>
+                        <label for="provedor" class="form-label bg-success py-2"><b>Nombre del Provedor:</b></label>
+                        <input
+                            type="text"
+                            readonly
+                            value="<?php echo $provedor;?>"
+                            class="form-control"
+                            name="provedor"
+                            id="provedor"
+                            aria-describedby="helpId"
+                            placeholder="Nombre del Provedor:"
+                        />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>
                         <input
                             type="number"
                             readonly
@@ -289,10 +307,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>
+                        <!--<label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             min="0"
                             max="1000000"
                             readonly
@@ -305,10 +324,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>
+                        <!--<label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -321,10 +341,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>
+                        <!--<label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -365,4 +386,15 @@
 
     </article>
 </section>
-<?php include("../../../temp/footer.php"); ?>
+<script>
+    document.querySelector('form').addEventListener('submit', (e)=>{
+        let provedor = document.getElementById('provedor').value.trim();
+        let cant_ingreso_inven = document.getElementById('cant_ingreso_inven').value.trim();
+
+        if(provedor == '' || cant_ingreso_inven == ''){
+            alert("rellene los campos provedor,y cantidad de ingreso de productos por favor");
+            e.preventDefault();
+        }
+    });
+</script>
+<?php include("../../../temp/footer.php");?>

@@ -51,6 +51,9 @@
                     <li class="nav-item">
                         <a style="color: #FFEB05;" class="nav-link" href="<?php echo $url_base; ?>sessiones/login/index.php"><b>Iniciar Session</b></a>
                     </li>
+                    <li class="nav-item">
+                        <a style="color: #FFEB05;" class="nav-link" href="<?php echo $url_base; ?>sessiones/tienda_almacen/index.php"><b>Tienda Inventario</b></a>
+                    </li>
                 </ul>
             </nav>
         </header>

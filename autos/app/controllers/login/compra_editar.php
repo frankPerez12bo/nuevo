@@ -38,6 +38,7 @@ if (isset($_GET['txtId'])) {
     $egreso = $copy['egreso'];
     $fecha = $copy['fecha'];
     $cant_comprar_bifor = $copy['cant_comprar_bifor'];
+    $cliente = $copy['cliente'];
 }
 
 if ($_POST) {
@@ -94,6 +95,7 @@ if ($_POST) {
     $egreso = (isset($_POST['egreso'])? $_POST['egreso']: '');
     $fecha = (isset($_POST['fecha'])? $_POST['fecha']: '');
     $cant_comprar_bifor = (isset($_POST['cant_comprar_bifor'])? $_POST['cant_comprar_bifor']: '');
+    $cliente = (isset($_POST['cliente'])? $_POST['cliente']: '');
 
 
     $sql = "UPDATE tb_libreria
@@ -111,7 +113,8 @@ if ($_POST) {
             ingreso=:ingreso,
             egreso=:egreso,
             fecha=:fecha,
-            cant_comprar_bifor=:cant_comprar_bifor
+            cant_comprar_bifor=:cant_comprar_bifor,
+            cliente=:cliente
             WHERE id=:id";
     $sentencia = $pdo->prepare($sql);
 
@@ -136,6 +139,7 @@ if ($_POST) {
     $sentencia->bindParam(':egreso',$egreso);
     $sentencia->bindParam(':fecha',$fecha);
     $sentencia->bindParam(':cant_comprar_bifor',$cantidad_comprar);
+    $sentencia->bindParam(':cliente',$cliente);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -144,7 +148,7 @@ if ($_POST) {
 ?>
 <?php include("../../../temp/header.php"); ?>
 <span class="fluid text-center text-primary">
-    <h5 class="bg-dark py-4" style="letter-spacing: 01vw;">Hacer Compra</h5>
+    <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0A5290;color:#FFEB05;">Hacer Compra</h5>
 </span>
 <section class="row">
     <article class="col-sm-4 col-md-4 col-lg-4 border border-3 border-dark py-5">
@@ -253,6 +257,18 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
+                        <label for="cliente" class="form-label bg-success py-2"><b>Nombre del Cliente</b></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="cliente"
+                            id="cliente"
+                            aria-describedby="helpId"
+                            placeholder="Nombre del Cliente"
+                        />
+                    </div>
+                    
+                    <div class="mb-3">
                         <label for="cantidad_comprar" class="form-label bg-dark text-white"><b>Cantidad a Comprar</b></label>
                         <input
                             type="number"
@@ -360,3 +376,14 @@ if ($_POST) {
     </article>
 </section>
 <?php include("../../../temp/footer.php"); ?>
+<script>
+    document.querySelector('form').addEventListener('submit',(e)=>{
+        let cliente = document.getElementById('cliente').value.trim();
+        let cantidad_comprar = document.getElementById('cantidad_comprar').value.trim();
+
+        if (cliente == '' || cantidad_comprar == '') {
+            alert("rellene el campo usuario y cantidad a comprar.");
+            e.preventDefault();
+        }
+    });
+</script>

@@ -43,6 +43,7 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 role="button"
                 >Cerrar Session
             </a>
+            
             <p class="bg-warning mt-2" style="opacity: 92%;padding-left: 02vw;">
                 Bienvenido : <?php echo "<b></b>". $_SESSION['session_email'] ."<br>". "Usuario : ".$_SESSION['nombre']; ?>
             </p>    
@@ -59,7 +60,23 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 role="button"
                 >agregar Produc</a
             >
-            
+            <a
+                name=""
+                id=""
+                class="btn btn-primary mt-3"
+                href="historial.php"
+                role="button"
+                >Historial</a
+            >
+            <a
+                name=""
+                id=""
+                class="btn btn-primary mt-3"
+                href="historial_provedores.php  "
+                role="button"
+                >Historial/Inven</a
+            >
+
                 <table
                     class="table table-danger table-hover mt-3"
                     style=""
@@ -80,12 +97,13 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                         <?php  foreach($ventas as $venta){?>
                             <tr class="">
                                 <td scope="row"><?php echo $venta['id']; ?></td>
-                                <td><?php echo $venta['producto']; ?></td>
+                                <td><?php echo $venta['producto']."<br>"."\nProvedor:\n".$venta['provedor'];?></td>
                                 <td><?php echo $venta['cantidad_inventario'];?></td>
                                 <td><?php echo "Cant/Total: ".$venta['cant_ingreso_inven']." Cant/actual: ".$venta['cant_total_ingreso']; ?></td>
                                 <td><?php echo $venta['precio_unid_inven']."$"; ?></td>
                                 <td><?php echo $venta['precio_unid_venta']."$"; ?></td>
-                                <td><?php echo $venta['cantidad_comprar']." unid"." /CA/".$venta['cant_comprar_bifor']; ?></td>
+                                <td><hp><b><?php echo "Cant-total- vendido/".$venta['cantidad_comprar']."unid"."<br>"." Cliente: ".$venta['cliente']."<br>"." /CA/".$venta['cant_comprar_bifor']."unid"; ?></b></hp></td>
+
                             </tr>
                         <?php
                         } ?>
