@@ -35,18 +35,21 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 <div class="fluid py-2" id="ingresoMain">
     <section class="row">
         <article class="col-sm-4 col-md-4 col-lg-4 border border-3 border-dark pt-3" id="articleOne">
-            <a
-                name=""
-                id=""
-                class="btn btn-dark"
-                href="cerrar_session.php"
-                role="button"
-                >Cerrar Session
-            </a>
+            <div class="space border border-4 border-dark py-5" style="position:fixed;width:32vw;">
+                <a
+                    name=""
+                    id=""
+                    class="btn btn-dark"
+                    href="cerrar_session.php"
+                    role="button"
+                    >Cerrar Session
+                </a>
             
-            <p class="bg-warning mt-2" style="opacity: 92%;padding-left: 02vw;">
-                Bienvenido : <?php echo "<b></b>". $_SESSION['session_email'] ."<br>". "Usuario : ".$_SESSION['nombre']; ?>
-            </p>    
+                <p class="bg-warning mt-2" style="opacity: 92%;padding-left: 02vw;">
+                    Bienvenido : <?php echo "<b></b>". $_SESSION['session_email'] ."<br>". "Usuario : ".$_SESSION['nombre']; ?>
+                </p>    
+            </div>
+            
         </article>
         <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark pt-3 bg-white" id="articleTwo">
             <div
@@ -137,7 +140,7 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             <tr class="">
                                 <td scope="row"><?php echo $venta['id']; ?></td>
                                 <td><?php echo $venta['producto']; ?></td>
-                                <td><?php echo $venta['precio_total_venta']."$"; ?></td>
+                                <td><?php echo "Total/pagar "."$".$venta['precio_total_venta']."<br>"."Efectivo Pagado: "."$".$venta['efectivo_pagar']."<br>"."Vuelto: "."$".$venta['vuelto']; ?></td>
                                 <td><?php echo $venta['precio_total_inven']."$"; ?></td>
                                 <td><?php echo $venta['ingreso']."$"; ?></td>
                                 <td><?php echo $venta['egreso']."$"; ?></td>

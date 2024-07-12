@@ -39,6 +39,7 @@ if (isset($_GET['txtId'])) {
     $fecha = $copy['fecha'];
     $cant_comprar_bifor = $copy['cant_comprar_bifor'];
     $cliente = $copy['cliente'];
+    
 }
 
 if ($_POST) {
@@ -96,7 +97,8 @@ if ($_POST) {
     $fecha = (isset($_POST['fecha'])? $_POST['fecha']: '');
     $cant_comprar_bifor = (isset($_POST['cant_comprar_bifor'])? $_POST['cant_comprar_bifor']: '');
     $cliente = (isset($_POST['cliente'])? $_POST['cliente']: '');
-
+    $efectivo_pagar = (isset($_POST['efectivo_pagar'])? $_POST['efectivo_pagar']: '');
+    $vuelto = $efectivo_pagar - $result_precio_total_venta;
 
     $sql = "UPDATE tb_libreria
             SET producto=:producto,
@@ -114,7 +116,9 @@ if ($_POST) {
             egreso=:egreso,
             fecha=:fecha,
             cant_comprar_bifor=:cant_comprar_bifor,
-            cliente=:cliente
+            cliente=:cliente,
+            efectivo_pagar=:efectivo_pagar,
+            vuelto=:vuelto
             WHERE id=:id";
     $sentencia = $pdo->prepare($sql);
 
@@ -140,6 +144,8 @@ if ($_POST) {
     $sentencia->bindParam(':fecha',$fecha);
     $sentencia->bindParam(':cant_comprar_bifor',$cantidad_comprar);
     $sentencia->bindParam(':cliente',$cliente);
+    $sentencia->bindParam(':efectivo_pagar',$efectivo_pagar);
+    $sentencia->bindParam(':vuelto',$vuelto);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -181,7 +187,7 @@ if ($_POST) {
                     </div>
                     
                     <div class="mb-3">
-                        <label for="producto" class="form-label">Nombre del Producto:</label>
+                        <label for="producto" class="form-label bg-success py-2"><b>Nombre del Producto:</b></label>
                         <input
                             type="text"
                             readonly
@@ -194,7 +200,7 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label">Cantidad en Inventario</label>
+                        <label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>
                         <input
                             type="number"
                             readonly
@@ -225,7 +231,7 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_inven" class="form-label">Precio Unidad Inventario</label>
+                        <label for="precio_unid_inven" class="form-label bg-info py-2"><b>Precio Unidad Inventario</b></label>
                         <input
                             step="0.01"
                             readonly
@@ -241,7 +247,7 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_venta" class="form-label">Precio Unidad Venta</label>
+                        <label for="precio_unid_venta" class="form-label bg-info py-2"><b>Precio Unidad Venta</b></label>
                         <input
                             step="0.01"
                             type="number"
@@ -269,7 +275,7 @@ if ($_POST) {
                     </div>
                     
                     <div class="mb-3">
-                        <label for="cantidad_comprar" class="form-label bg-dark text-white"><b>Cantidad a Comprar</b></label>
+                        <label for="cantidad_comprar" class="form-label bg-dark text-white py-2"><b>Cantidad a Comprar</b></label>
                         <input
                             type="number"
                             class="form-control"
@@ -283,7 +289,19 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_venta" class="form-label bg-dark text-white"><b>Precio Total Venta</b></label>
+                        <label for="efectivo_pagar" class="form-label bg-dark text-white py-2"><b>Efectivo pagar:</b></label>
+                        <input
+                            type="number"
+                            step="0.001"
+                            class="form-control"
+                            name="efectivo_pagar"
+                            id="efectivo_pagar"
+                            aria-describedby="helpId"
+                            placeholder="Efectivo pagar:"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio_total_venta" class="form-label bg-dark text-white py-2"><b>Precio Total Venta</b></label>
                         <input
                             step="0.01"
                             readonly
@@ -315,9 +333,11 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>
+
+                        <!--<label for="egreso" class="form-label bg-dark text-white"><b>Egreso</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
                             readonly
                             min="0"
@@ -331,9 +351,10 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>
+                    <!--<label for="ingreso" class="form-label bg-dark text-white"><b>Ingreso</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
                             readonly
                             min="0"
@@ -380,9 +401,10 @@ if ($_POST) {
     document.querySelector('form').addEventListener('submit',(e)=>{
         let cliente = document.getElementById('cliente').value.trim();
         let cantidad_comprar = document.getElementById('cantidad_comprar').value.trim();
+        let efectivo_pagar = document.getElementById('efectivo_pagar').value.trim();
 
-        if (cliente == '' || cantidad_comprar == '') {
-            alert("rellene el campo usuario y cantidad a comprar.");
+        if (cliente == '' || cantidad_comprar == '' || efectivo_pagar == '') {
+            alert("rellene el campo usuario y cantidad a comprar y efectivo a pagar.");
             e.preventDefault();
         }
     });

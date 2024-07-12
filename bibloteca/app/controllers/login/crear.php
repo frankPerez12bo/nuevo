@@ -14,6 +14,16 @@ if($_POST){
     $egreso = (isset($_POST['egreso'])? $_POST['egreso']:'');
     $fecha = (isset($_POST['fecha'])? $_POST['fecha']:'');
     $provedor = (isset($_POST['provedor'])? $_POST['provedor']:'');
+    $figura = (isset($_FILES['figura']['name']) ? $_FILES['figura']['name'] : '');
+
+        $fecha_figura = new DateTime();
+        $nombre_figura = ($figura)? $fecha_figura->getTimestamp()." _ ".$_FILES['figura']['name']: "";
+        $tmp_figura = $_FILES['figura']['tmp_name'];
+
+        if($tmp_figura != ''){
+            move_uploaded_file($tmp_figura,'../../../public/archivos/imgenes/'.$nombre_figura);
+        }
+
 
     $sql = "INSERT INTO tb_libreria(id,
                                     producto,
@@ -27,7 +37,8 @@ if($_POST){
                                     ingreso,
                                     egreso,
                                     fecha,
-                                    provedor)
+                                    provedor,
+                                    figura)
             VALUES(null,:producto,
                                     :cantidad_inventario,
                                     :cant_ingreso_inven,
@@ -39,7 +50,8 @@ if($_POST){
                                     :ingreso,
                                     :egreso,
                                     :fecha,
-                                    :provedor)";
+                                    :provedor,
+                                    :figura)";
 
     $sentencia = $pdo->prepare($sql);
 
@@ -56,7 +68,7 @@ if($_POST){
     $sentencia->bindParam(':egreso',$egreso);
     $sentencia->bindParam(':fecha',$fecha);
     $sentencia->bindParam(':provedor',$provedor);
-
+    $sentencia->bindParam(':figura',$nombre_figura);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -102,6 +114,18 @@ if($_POST){
                             id="provedor"
                             aria-describedby="helpId"
                             placeholder="Provedor:"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="figura" class="form-label bg-success py-2"><b>Insertar Imagen:</b></label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            class="form-control"
+                            name="figura"
+                            id="figura"
+                            aria-describedby="helpId"
+                            placeholder="Insertar Imagen:"
                         />
                     </div>
                     
@@ -229,8 +253,9 @@ if($_POST){
         let precio_unid_inven = document.getElementById('precio_unid_inven').value.trim();
         let precio_unid_venta = document.getElementById('precio_unid_venta').value.trim();
         let provedor = document.getElementById('provedor').value.trim();
+        let figura = document.getElementById('figura').value.trim();
 
-        if (producto == '' || cantidad_inventario == '' || precio_unid_inven == '' || precio_unid_venta == '' || provedor == '') {
+        if (producto == '' || cantidad_inventario == '' || precio_unid_inven == '' || precio_unid_venta == '' || provedor == '' || figura == '') {
             alert("complete los campos");
             e.preventDefault();
         }

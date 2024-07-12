@@ -98,7 +98,13 @@ if ($_POST) {
     $cant_comprar_bifor = (isset($_POST['cant_comprar_bifor'])? $_POST['cant_comprar_bifor']: '');
 
     $cliente = (isset($_POST['cliente'])? $_POST['cliente']: '');
+    $efectivo_pagar = (isset($_POST['efectivo_pagar'])? $_POST['efectivo_pagar']: '');
+    $vuelto = $efectivo_pagar - $result_precio_total_venta;
 
+    /*if ($efectivo_pagar > $result_precio_total_venta) {
+        # code...
+        echo "<script>alert('monto inferior a al costo del producto');</script>";
+    }*/
 
     $sql = "UPDATE tb_libreria
             SET producto=:producto,
@@ -116,7 +122,9 @@ if ($_POST) {
             egreso=:egreso,
             fecha=:fecha,
             cant_comprar_bifor=:cant_comprar_bifor,
-            cliente=:cliente
+            cliente=:cliente,
+            efectivo_pagar=:efectivo_pagar,
+            vuelto=:vuelto
             WHERE id=:id";
     $sentencia = $pdo->prepare($sql);
 
@@ -142,6 +150,8 @@ if ($_POST) {
     $sentencia->bindParam(':fecha',$fecha);
     $sentencia->bindParam(':cant_comprar_bifor',$cantidad_comprar);
     $sentencia->bindParam(':cliente',$cliente);
+    $sentencia->bindParam(':efectivo_pagar',$efectivo_pagar);
+    $sentencia->bindParam(':vuelto',$vuelto);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -187,7 +197,7 @@ if ($_POST) {
                     </div>
                     
                     <div class="mb-3">
-                        <label for="producto" class="form-label">Nombre del Producto:</label>
+                        <label for="producto" class="form-label bg-success py-2"><b>Nombre del Producto:</b></label>
                         <input
                             type="text"
                             readonly
@@ -200,7 +210,7 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label">Cantidad en Inventario</label>
+                        <label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>
                         <input
                             type="number"
                             readonly
@@ -289,6 +299,19 @@ if ($_POST) {
                             placeholder="Cantidad a Comprar"
                         />
                     </div>
+                    <div class="mb-3">
+                        <label for="efectivo_pagar" class="form-label bg-dark text-white py-2"><b>Efectivo pagar:</b></label>
+                        <input
+                            type="number"
+                            step="0.001"
+                            class="form-control"
+                            name="efectivo_pagar"
+                            id="efectivo_pagar"
+                            aria-describedby="helpId"
+                            placeholder="Efectivo pagar:"
+                        />
+                    </div>
+                    
                     <div class="mb-3">
                         <!--<label for="precio_total_venta" class="form-label bg-dark text-white py-2"><b>Precio Total Venta</b></label>-->
                         <input
@@ -392,8 +415,9 @@ if ($_POST) {
     document.querySelector('form').addEventListener('submit',(e)=>{
         const cliente = document.getElementById('cliente').value.trim();
         const cantidad_comprar = document.getElementById('cantidad_comprar').value.trim();
-        if(cliente == '' || cantidad_comprar == ''){
-            alert('rellene el campo cliente ,rellene el campo la cantidad de la compra');
+        const efectivo_pagar = document.getElementById('efectivo_pagar').value.trim();
+        if(cliente == '' || cantidad_comprar == '' || efectivo_pagar == ''){
+            alert('rellene el campo cliente ,rellene el campo la cantidad de la compra y efectivo a pagar por favor');
             e.preventDefault();
 
         }

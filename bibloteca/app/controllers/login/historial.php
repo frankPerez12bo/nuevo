@@ -48,7 +48,9 @@ if (isset($_GET['txtId'])) {
                 <p class="card-text" ><h5 class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Obra Comprada : <b><?php echo $cliente['producto']?></b></h5></p>
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Cantidad Comprada : <b><?php echo $cliente['cant_comprar_bifor']."/unid"?></b></p></p>
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Precio Unidad : <b><?php echo $cliente['precio_unid_venta']."$"?></b></p></p>
-                <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Total pagado : <b><?php echo $cliente['precio_total_venta']."$"?></b></p></p>
+                <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Monto total : <b><?php echo $cliente['precio_total_venta']."$"?></b></p></p>
+                <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Efectivo Pagado : <b><?php echo $cliente['efectivo_pagar']."$"?></b></p></p>
+                <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Vuelto : <b><?php echo $cliente['vuelto']."$"?></b></p></p>
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Fecha : <b><?php date_default_timezone_set('America/Lima'); echo date('Y-m-d h:i:s'); ?></b></p></p>
                 <a
         name=""

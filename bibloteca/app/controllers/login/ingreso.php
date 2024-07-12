@@ -3,6 +3,7 @@
 //$nombresMain = $_POST['nombres'];
 $email = $_POST['email'];
 $password_user = $_POST['password_user'];
+//$new_password_dcr = openssl_decrypt($password_user,COD,KEY);
 //declarar var contador
 
 $contador = 0;

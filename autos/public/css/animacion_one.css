@@ -1,0 +1,21 @@
+.hidden {
+    opacity: 0;
+    transition: opacity 800ms ease-in-out;
+}
+
+.show {
+    opacity: 1;
+    transition: opacity 40ms ease-in-out;
+}
+
+.image-container {
+    height: 100vh; /* Para crear espacio desplazable */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

@@ -15,7 +15,7 @@ $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($productos as $producto){?>
             <span class="col-sm-3 col-md-3 col-lg-3 border border-3 border-info py-2">
                 <div class="card text-start">
-                    <img class="card-img-top" src="holder.js/100px180/" alt="Title" />
+                    <img class="card-img-top" src="../../public/archivos/imgenes/<?php echo $producto['figura']; ?>" width="140px" alt="Title" />
                     <div class="card-body">
                         <p class="card-text py-1">Provedor : <strong><?php echo $producto['provedor']; ?></strong></p>
                         <p class="card-text py-1">Producto : <strong><?php echo $producto['producto']."<br> Id: " .$producto['id']; ?></strong></p> 
@@ -42,15 +42,16 @@ $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <h3 class="text-center text-primary bg-dark" id="cotizar">Cotizar</h3>
 
                 <label for="product_select">Selecciona un producto:</label>
-                <select id="product_select">
-                    <option value="20587.81" data-price="20587.81">ID 3</option>
+                <select id="producto" name="producto">
                     <option value="17777.85" data-price="17777.85">ID 2</option>
-                    <option value="14892.85" data-price="14892.85">ID 5</option>
+                    <option value="20587.81" data-price="20587.81">ID 3</option>
                     <option value="17510.25" data-price="17510.25">ID 4</option>
+                    <option value="14892.85" data-price="14892.85">ID 5</option>
+                    <option value="14874.52" data-price="14874.52">ID 6 </option>
                 </select>
                 <br>
-                <input type="number" name="precio" id="precio" placeholder="Precio Total" min="0" max="1000000" step="0.001">
-                <label for="precio" class="bg-success py-1 mt-4"><b>Precio Total</b></label>
+                    <input type="number" name="precio" id="precio" placeholder="Precio Total" min="0" max="1000000" step="0.001">
+                    <label for="precio" class="bg-success py-1 mt-4" value="<?php echo $producto['precio_unid_venta']; ?>"><b>Precio Total</b></label>
                 <br>
 
                 <input type="number" name="adelanto" id="adelanto" placeholder="Adelanto:" min="15" max="100" step="10">
@@ -70,4 +71,18 @@ $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     
 </section>
 <script src="../../public/js/cot.js"></script>
+<script src="../../public/js/boton.js" ></script>
+<script>
+        // Seleccionamos el elemento select y el input donde se mostrará el precio
+        const productoSelect = document.getElementById('producto');
+        const precioInput = document.getElementById('precio');
+        
+        // Añadimos un evento 'change' al select para detectar cuando se seleccione un producto
+        productoSelect.addEventListener('change', function() {
+            // Obtenemos el valor seleccionado, que es el precio del producto
+            const precio = this.value;
+            // Asignamos el valor del precio al input de precio
+            precioInput.value = precio;
+        });
+    </script>
 <?php include("../../temp/footer.php"); ?>

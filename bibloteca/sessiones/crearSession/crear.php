@@ -6,11 +6,14 @@ if ($_POST) {
     $nombres = (isset($_POST['nombres'])? $_POST['nombres'] :"");
     $email = (isset($_POST['email'])? $_POST['email']: "");
     $password_user =(isset($_POST['password_user'])? $_POST['password_user']:"");
-    $token = (isset($_POST['token'])?  $_POST['token']: "");
-    $fyh_creacion = (isset($_POST['fyh_creacion'])? $_POST['fyh_creacion']:"");
 
-    $fecha = new DateTime();
-    $newFecha = $fyh_creacion."_". $fecha->format('Y-m-d h:i:s');
+    //$new_password_encr = openssl_encrypt($password_user,COD,KEY);
+
+    $token = (isset($_POST['token'])?  $_POST['token']: "");
+    //$fyh_creacion = (isset($_POST['fyh_creacion'])? $_POST['fyh_creacion']:"");
+
+    $fecha = date_default_timezone_set('America/lima');
+    $newFecha =$fecha;
     $fyh_actualizacion = (isset($_POST['fyh_actualizacion'])? $_POST['fyh_actualizacion']:"");
 
 

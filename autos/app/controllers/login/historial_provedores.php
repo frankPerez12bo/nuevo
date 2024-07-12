@@ -18,7 +18,7 @@ if (isset($_GET['txtId'])) {
 ?>
 <?php include("../../../temp/header.php"); ?>
 <span class="fluid text-center text-primary">
-    <h5 class="bg-dark py-4" style="letter-spacing: 1.2vw;">Historial Ingreso/Productos Inventario</h5>
+    <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0A5290;color:#F9EF31;">Historial Ingreso Productos/Inventario</h5>
 </span>
 <hr>
 <section class="row container">
@@ -39,7 +39,7 @@ if (isset($_GET['txtId'])) {
                 class="table-responsive"
             >
                 <table
-                    class="table table-dark table-hover "
+                    class="table table-danger table-hover "
                     id="tabla_provedores"
                 >
                     <thead>
@@ -74,7 +74,7 @@ if (isset($_GET['txtId'])) {
                                     <a
                                         name=""
                                         id=""
-                                        class="btn btn-primary"
+                                        class="btn btn-dark"
                                         href="#"
                                         role="button"
                                         >Modificar</a

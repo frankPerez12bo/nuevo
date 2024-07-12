@@ -1,13 +1,13 @@
 <?php include("../../app/config.php"); ?>
 <?php include("../../temp/header.php"); ?>
-    <link rel="stylesheet" href="../../public/css/login.css">
+    <link rel="stylesheet" href="../../public/css/logn_inicio.css">
     <span class="fluid text-center text-primary">
             <h5 class="bg-dark py-4" style="letter-spacing: 01vw;">Iniciar Session</h5>
         </span>
     <body>
         <section class="row">
             <article class="col-sm-5 col-md-5 col-lg-5 col-xl-5 border border-4 border-dark py-5 ">
-                <div class="card">
+                <div class="card" style="background-attachment: fixed;">
                     <div class="card-header">
                         <a
                         name=""
@@ -65,8 +65,17 @@
                 </div>
                 </div>
             </article>
+            <article class="col-sm-7 col-md-7 col-lg-7 col-xl-7 border border-4 border-dark py-5" id="articleMain">
+                <div id='container'>
+
+                </div>
+                <div>
+                    <!--<a href='https://codepen.io/raurir/pen/jkLEv' target='_parent'>interactive version</a>-->
+                </div>
+            </article>
         </section>
     </body>
 <?php include("../../temp/footer.php");?>
 <script src="../../public/js/empty_login.js"></script>
 <script src="../../public/js/input_login.js"></script>
+<script src="../../public/js/animacion.js"></script>

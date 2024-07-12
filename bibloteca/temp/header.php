@@ -51,6 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="<?php echo $url_base; ?>sessiones/login/index.php">Inicio Login</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="<?php echo $url_base; ?>sessiones/tienda_almacen/index.php">Tienda Almacen</a>
+                    </li>
                     <li>
                         <a href="index.php">
                             <i  class="fa-solid fa-house text-white bg-info mt-2 py-2 border border-2 border-warning" style="margin-left:50vw;"></i>

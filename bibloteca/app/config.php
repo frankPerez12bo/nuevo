@@ -1,8 +1,13 @@
 <?php
+
+
 define('HOST','localhost');
 define('USER','root');
 define('PASSWORD','');
 define('DBNAME','ventas');
+
+define('COD','valentina');
+define('KEY','AES-128-ECB');
 
 $servidor = "mysql:dbname=".DBNAME.";host=".HOST;
 $fecha = new DateTime();

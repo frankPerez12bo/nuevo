@@ -1,0 +1,10 @@
+body{
+    background-color: rgba(0, 0, 0, .3);
+    margin:0;padding:0;
+}
+#articleMain{
+    background-color: rgba(0, 0, 0, .3);
+    margin:0;padding:0;
+}
+a{ padding:10px 0;color: #444; text-decoration:none;font-family:courier;
+}
