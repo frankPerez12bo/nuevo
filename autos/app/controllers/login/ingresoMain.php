@@ -44,10 +44,22 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                     role="button"
                     >Cerrar Session
                 </a>
-            
-                <p class="bg-warning mt-2" style="opacity: 92%;padding-left: 02vw;">
+                <form action="" method="post" enctype="multipart/form-data">
+                        <label for="imageMain" style="background-color: transparent;"></label>
+                        <input type="file" name="imageMain" id="imageMain" class="">
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            name="btnImage"
+                        >
+                            ...
+                        </button>
+
+                </form>
+                <h5 class="bg-warning mt-2" style="opacity: 92%;padding-left: 02vw;">
                     Bienvenido : <?php echo "<b></b>". $_SESSION['session_email'] ."<br>". "Usuario : ".$_SESSION['nombre']; ?>
-                </p>    
+                </h5>
+                <!--<p><?php echo "la clave es : ".$copyNew['password_user']; ?></p>-->
             </div>
             
         </article>
@@ -144,7 +156,7 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?php echo $venta['precio_total_inven']."$"; ?></td>
                                 <td><?php echo $venta['ingreso']."$"; ?></td>
                                 <td><?php echo $venta['egreso']."$"; ?></td>
-                                <td><?php $fecha = new DateTime(); echo $fecha->format('Y-m-d h:i:s'); ?></td>
+                                <td><?php date_default_timezone_set("America/Lima");$fecha =date("Y-m-d h:i:s"); echo $fecha; ?></td>
 
                                 <td>
                                     <a
@@ -153,7 +165,9 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                         class="btn btn-dark"
                                         href="javascript:limpiar(<?php echo $venta['id'];?>)"
                                         role="button"
-                                        >Eliminar</a
+                                        >
+                                            <i class="fa-solid fa-trash text-white"></i>
+                                        </a
                                     >
                                     <a
                                         name=""
@@ -161,15 +175,19 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                         class="btn btn-info"
                                         href="compra_editar.php?txtId=<?php echo $venta['id'];?>"
                                         role="button"
-                                        >Comprar</a
+                                        >
+                                            <i class="fa-solid fa-cash-register"></i>
+                                        </a
                                     >
                                     <a
                                         name=""
                                         id=""
-                                        class="btn btn-danger mt-3 "
+                                        class="btn btn-success mt-3 "
                                         href="add_pruct_inven.php?txtId=<?php echo $venta['id'];?>"
                                         role="button"
-                                        >Ing Product/Inventario</a
+                                        >
+                                            <i class="fa-solid fa-cart-flatbed"></i>
+                                        </a
                                     >
                                 </td>
                             </tr>
@@ -207,4 +225,3 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 </script>
-

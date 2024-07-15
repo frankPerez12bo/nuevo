@@ -1,3 +1,11 @@
+<?php include("../../../app/db.php");
+session_start();
+if(isset($_SESSION['session_email'])){
+    echo "bienvenido ".$_SESSION['session_email'];
+}else{
+    header('location:../../.../index.php');
+}
+?>
 <?php include("../../../app/config.php"); 
 if (isset($_GET['txtId'])) {
     # code...
@@ -13,8 +21,9 @@ if (isset($_GET['txtId'])) {
     $copy = $sentencia->fetch(PDO::FETCH_LAZY);
 
     $producto = $copy['producto'];
+    echo "cliente : ".$nombres = $copy['cliente'];
 
-
+    $figura = $copy['figura'];
 
 
     $cantidad_inventario = $copy['cantidad_inventario'];
@@ -37,8 +46,13 @@ if (isset($_GET['txtId'])) {
     $ingreso = $copy['ingreso'];
     $egreso = $copy['egreso'];
     $fecha = $copy['fecha'];
-    $cant_comprar_bifor = $copy['cant_comprar_bifor'];
     $cliente = $copy['cliente'];
+    $cliente_bifor = $copy['cliente'];
+
+    $cant_comprada = $copy['cant_comprar_bifor'];
+
+    $precio_total_venta_bifor = $copy['precio_total_venta_bifor'];
+    $efectivo_bifor = $copy['efectivo_pagar'];
     
 }
 
@@ -98,7 +112,14 @@ if ($_POST) {
     $cant_comprar_bifor = (isset($_POST['cant_comprar_bifor'])? $_POST['cant_comprar_bifor']: '');
     $cliente = (isset($_POST['cliente'])? $_POST['cliente']: '');
     $efectivo_pagar = (isset($_POST['efectivo_pagar'])? $_POST['efectivo_pagar']: '');
+    $cliente_bifor = $copy['cliente'];
     $vuelto = $efectivo_pagar - $result_precio_total_venta;
+    
+    $cant_comprada = $copy['cant_comprar_bifor'];
+
+    $precio_all_vBifor = $cant_comprada * $precio_unid_venta;
+    $efectivo_bifor =  $copy['efectivo_pagar'];
+    $vuelto_bifor = $efectivo_bifor - $precio_all_vBifor;
 
     $sql = "UPDATE tb_libreria
             SET producto=:producto,
@@ -118,7 +139,12 @@ if ($_POST) {
             cant_comprar_bifor=:cant_comprar_bifor,
             cliente=:cliente,
             efectivo_pagar=:efectivo_pagar,
-            vuelto=:vuelto
+            vuelto=:vuelto,
+            cliente_bifor=:cliente_bifor,
+            cant_comprada=:cant_comprada,
+            precio_all_vBifor=:precio_all_vBifor,
+            efectivo_bifor=:efectivo_bifor,
+            vuelto_bifor=:vuelto_bifor
             WHERE id=:id";
     $sentencia = $pdo->prepare($sql);
 
@@ -146,6 +172,12 @@ if ($_POST) {
     $sentencia->bindParam(':cliente',$cliente);
     $sentencia->bindParam(':efectivo_pagar',$efectivo_pagar);
     $sentencia->bindParam(':vuelto',$vuelto);
+    $sentencia->bindParam(':cliente_bifor',$cliente_bifor);
+    $sentencia->bindParam(':cant_comprada',$cant_comprada);
+    $sentencia->bindParam(':precio_all_vBifor',$precio_all_vBifor);
+    $sentencia->bindParam(':efectivo_bifor',$efectivo_bifor);
+    $sentencia->bindParam(':vuelto_bifor',$vuelto_bifor
+);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -171,7 +203,7 @@ if ($_POST) {
                 
             </div>
             <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data" id="miFormularioTwo">
                     <div class="mb-3">
                         <label for="txtId" class="form-label">ID:</label>
                         <input
@@ -187,10 +219,12 @@ if ($_POST) {
                     </div>
                     
                     <div class="mb-3">
-                        <label for="producto" class="form-label bg-success py-2"><b>Nombre del Producto:</b></label>
+                        <!--<label for="producto" class="form-label bg-success py-2"><b>Nombre del Producto:</b></label>-->
                         <input
                             type="text"
                             readonly
+                            hidden
+                            oninput=""
                             value="<?php echo $producto;?>"
                             class="form-control"
                             name="producto"
@@ -200,10 +234,11 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>
+                        <!---<label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>-->
                         <input
                             type="number"
                             readonly
+                            hidden
                             min="0"
                             max="1000000"
                             value="<?php echo $cantidad_inventario;?>"
@@ -231,10 +266,11 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_inven" class="form-label bg-info py-2"><b>Precio Unidad Inventario</b></label>
+                        <!--<label for="precio_unid_inven" class="form-label bg-info py-2"><b>Precio Unidad Inventario</b></label>-->
                         <input
                             step="0.01"
                             readonly
+                            hidden
                             type="number"
                             min="0"
                             max="1000000"
@@ -247,10 +283,11 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_venta" class="form-label bg-info py-2"><b>Precio Unidad Venta</b></label>
+                        <!--<label for="precio_unid_venta" class="form-label bg-info py-2"><b>Precio Unidad Venta</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             min="0"
                             max="1000000"
                             readonly
@@ -268,19 +305,20 @@ if ($_POST) {
                             type="text"
                             class="form-control"
                             name="cliente"
+                            oninput="validarCliente()"
                             id="cliente"
                             aria-describedby="helpId"
                             placeholder="Nombre del Cliente"
                         />
                     </div>
-                    
+                    <span class="error" id="mensajeError"></span>
                     <div class="mb-3">
                         <label for="cantidad_comprar" class="form-label bg-dark text-white py-2"><b>Cantidad a Comprar</b></label>
                         <input
                             type="number"
                             class="form-control"
                             min="1"
-                            max="1000000"
+                            max="7"
                             name="cantidad_comprar"
                             value="<?php echo $cantidad_comprar;?>"
                             id="cantidad_comprar"
@@ -293,6 +331,8 @@ if ($_POST) {
                         <input
                             type="number"
                             step="0.001"
+                            min="5000"
+                            max="100000"
                             class="form-control"
                             name="efectivo_pagar"
                             id="efectivo_pagar"
@@ -301,9 +341,10 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_venta" class="form-label bg-dark text-white py-2"><b>Precio Total Venta</b></label>
+                        <!--<label for="precio_total_venta" class="form-label bg-dark text-white py-2"><b>Precio Total Venta</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -317,11 +358,12 @@ if ($_POST) {
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>
+                        <!--<label for="precio_total_inven" class="form-label bg-dark text-white"><b>Precio Total Inventario</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
-                            min="0"
+                            min="1"
                             max="1000000"
                             readonly
                             value="<?php echo $precio_total_inven; ?>"
@@ -392,8 +434,22 @@ if ($_POST) {
         </div>
         
     </article>
-    <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark py-5">
-
+    <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark py-5" style="background-color:rgba(0, 0, 0, .4)">
+        <h3>Bienvenido : <?php echo $_SESSION['nombre'];?></h3>
+        <span class="text-center"><h2 class="border border-1 border-dark py-2" style="letter-spacing:01vw;text-shadow: 0px 04px 07px beige;background-color:#0A5290;color:#FFEB05;"><?php echo $copy['producto'];?></h2></span>
+        <section class="row">
+            <article class="col-sm-7 col-md-7 col-lg-7">
+                <div class="card text-start">
+                    <img class="card-img-top" src="../../../public/archivos/imgenes/<?php echo $copy['figura']; ?>" alt="Title" />
+                    <div class="card-body">
+                        <p class="card-text"><?php echo "Cantidad Inventario : ".$copy['cantidad_inventario']."/unid"; ?></p>
+                        <p class="card-text"><?php echo "Precio Unidad Inventario : "."$".$copy['precio_unid_inven']; ?></p>
+                        <p class="card-text"><?php echo "Precio Unidad Venta : "."$".$copy['precio_unid_venta'];?></p>
+                    </div>
+                </div>
+                
+            </article>
+        </section>        
     </article>
 </section>
 <?php include("../../../temp/footer.php"); ?>
@@ -405,6 +461,23 @@ if ($_POST) {
 
         if (cliente == '' || cantidad_comprar == '' || efectivo_pagar == '') {
             alert("rellene el campo usuario y cantidad a comprar y efectivo a pagar.");
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+    function validarCliente(){
+        let cliente = document.getElementById('cliente').value.trim();
+        let regex = /^[A-Za-z]+(\s[A-Za-z]+){2}$/;
+        if(regex.test(cliente)){
+            document.getElementById('mensajeError').textContent = '';
+        }else{
+            document.getElementById('mensajeError').textContent = 'solo se accepta letras,un nombre y dos apellidos.';
+        }
+    };
+    document.getElementById('miFormularioTwo').addEventListener('submit',(e)=>{
+        validarCliente();
+        if(document.getElementById('mensajeError').textContent !== ""){
             e.preventDefault();
         }
     });

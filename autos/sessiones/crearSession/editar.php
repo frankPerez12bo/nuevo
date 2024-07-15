@@ -42,8 +42,8 @@ if ($_POST) {
 }
 ?>
 <?php include("../../temp/header.php");?>
-<span class="fluid text-center text-primary">
-    <h5 class="bg-dark py-4" style="letter-spacing: 01vw;">Modificar Cuenta de Usuario</h5>
+<span class="fluid text-center">
+    <h5 class="py-4" style="letter-spacing: 01vw;background-color: #0A5290;color:#F9EF31;">Modificar Cuenta de Usuario</h5>
 </span>
 <section class="row">
     <article id="articleOne" class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 border border-4 border-dark py-5">
@@ -72,29 +72,33 @@ if ($_POST) {
             </div>
             
             <div class="mb-3">
-                <label for="nombres" class="form-label"><b>Insertar nombres</b> </label>
+                <label for="nombres" class="form-label mt-5"><b>Insertar nombres</b> </label>
                 <input
                     type="text"
                     value="<?php echo $nombres;?>"
                     class="form-control"
+                    oninput="validarNombre()"
                     name="nombres"
                     id="nombres"
                     aria-describedby="helpId"
                     placeholder="Insertar nombres"
                 />
             </div>
-            <div class="mb-3">
+            <span id="errorMensaje" class="bg-info"></span>
+            <div class="mb-3 mt-5">
                 <label for="email" class="form-label"><b>Gmail</b></label>
                 <input
                     type="email"
                     value="<?php echo $email;?>"
                     class="form-control"
                     name="email"
+                    oninput="validarGamail()"
                     id="email"
                     aria-describedby="helpId"
                     placeholder="Gmail"
                 />
             </div>
+            <span id="errorMensaje" class="bg-info"></span>
             <div class="mb-3">
                 <label for="password_user" class="form-label"><b>Contraseña</b></label>
                 <input
@@ -164,12 +168,17 @@ if ($_POST) {
         let nombres = document.getElementById('nombres').value.trim();
         let email = document.getElementById('email').value.trim();
         let password_user = document.getElementById('password_user').value.trim();
+        
+        if(nombres == "" || email == "" || password_user == ""){
+            alert("debes completar los campos");
+            e.preventDefault();
+        }
 
         if (email.length <= 12) {
             alert("el campo debe tener mas de 11 caracteres");
             e.preventDefault();
-        } else if(email.length >=40){
-            alert("maximo de caracteres 40 ,email innabilitado");
+        } else if(email.length >=37){
+            alert("maximo de caracteres 37 ,email innabilitado");
             e.preventDefault();
         }
 
@@ -181,4 +190,41 @@ if ($_POST) {
             e.preventDefault();
         }
     });
+</script>
+<script>
+    function validarGamail(){
+        let regex = /^[a-zA-Z0-9_$%+]+@(gmail|hotmail)\.(com|or|pe|mx|bol|arg)$/;
+        let email = document.getElementById('email').value.trim();
+        if(regex.test(email)){
+            document.getElementById('errorMensaje').textContent = "";
+        }else{
+            document.getElementById('errorMensaje').textContent = 'escriba un correo,los caracteres que se accepta( _ $ % + ). Luego la extencion disponibles(@hotmail,@gmail.com ó or,pe,mx,bol,arg)';
+        }
+    }
+
+    document.getElementById('miFormulario').addEventListener('submit',(e)=>{
+        validarGamail();
+        if(document.getElementById.textContent !== ""){
+            //e.preventDefault();
+        }
+    });
+</script>
+<script>
+    function validarNombre(){
+        let regex = /^[A-Za-z]+(\s[A-Za-z]+){2}$/;
+        let nombres = document.getElementById("nombres").value.trim();
+
+        if(regex.test(nombres)){
+            document.getElementById('errorMensaje').textContent = '';
+        }else{
+            document.getElementById('errorMensaje').textContent = 'solo se acepta letras un nombre ,dos alias';
+        }
+
+        document.getElementById('miFormulario').addEventListener('submit',(e)=>{
+            validarNombre();
+            if(document.getElementById('errorMensaje').textContent !== ""){
+                e.preventDefault();
+            }
+        });
+    }
 </script>

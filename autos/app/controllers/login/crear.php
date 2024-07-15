@@ -92,7 +92,7 @@ if($_POST){
                 
             </div>
             <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data" id="miFormulario">
                     <div class="mb-3">
                         <label for="producto" class="form-label bg-dark text-white py-2"><b>Nombre del Producto:</b></label>
                         <input
@@ -100,21 +100,26 @@ if($_POST){
                             class="form-control"
                             name="producto"
                             id="producto"
+                            oninput="validarInput()"
                             aria-describedby="helpId"
                             placeholder="Nombre del Producto:"
                         />
                     </div>
-                    <div class="mb-3">
+                    <span id="errorMensaje" class="bg-danger py-2" style="opacity: 95%;"><p class=""></p></span>
+                    
+                    <div class="mb-3 mt-5">
                         <label for="provedor" class="form-label bg-success py-2"><b>Provedor:</b></label>
                         <input
                             type="text"
                             class="form-control"
                             name="provedor"
                             id="provedor"
+                            oninput="validadProvedor()"
                             aria-describedby="helpId"
                             placeholder="Provedor:"
                         />
                     </div>
+                    <span class="errorMensaje" id="errorMensajeProvedor" style="background-color:crimson;"></span>
                     <div class="mb-3">
                         <label for="figura" class="form-label bg-success py-2"><b>Insertar Imagen</b></label>
                         <input
@@ -129,9 +134,11 @@ if($_POST){
                     </div>
                     
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label bg-dark text-white py-2"><b>Cantidad en Inventario</b></label>
+                        <label for="cantidad_inventario" class="form-label bg-dark text-white py-2" oninput="validateInput(event)"><b>Cantidad en Inventario</b></label>
                         <input
                             type="number"
+                            min="1"
+                            max="30"
                             class="form-control"
                             name="cantidad_inventario"
                             id="cantidad_inventario"
@@ -158,6 +165,8 @@ if($_POST){
                             step="0.01"
                             type="number"
                             class="form-control"
+                            min="2000"
+                            max="20000"
                             name="precio_unid_inven"
                             id="precio_unid_inven"
                             aria-describedby="helpId"
@@ -169,6 +178,8 @@ if($_POST){
                         <input
                             step="0.01"
                             type="number"
+                            min="7200"
+                            max="99000"
                             class="form-control"
                             name="precio_unid_venta"
                             id="precio_unid_venta"
@@ -256,6 +267,52 @@ if($_POST){
 
         if (producto == '' || cantidad_inventario == '' || precio_unid_inven == '' || precio_unid_venta == '' || provedor == '' || figura == '') {
             alert("complete los campos");
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+        // Función para validar el input usando una expresión regular
+        function validarInput() {
+            // Obtenemos el valor del input de texto
+            let producto = document.getElementById('producto').value.trim();
+             // Expresión regular que permite solo letras (mayúsculas y minúsculas) y espacios, pero no espacios iniciales
+            let regex = /^[A-Za-z]+[A-Za-z\s]+\s\d{4}$/;
+
+            // Prueba si el input coincide con la expresión regular
+            if (regex.test(producto)) {
+                // Si el input es válido, limpiamos el mensaje de error
+                document.getElementById('errorMensaje').textContent = "";
+            } else {
+                // Si el input no es válido, mostramos un mensaje de error
+                document.getElementById('errorMensaje').textContent = "Primero ingrese caracteristica luego el nombre del producto,luego el año.";
+            }
+        }
+
+        // Agregamos un evento de escucha para el envío del formulario
+        document.getElementById('miFormulario').addEventListener('submit', function(event) {
+            // Validamos el input antes de enviar el formulario
+            validarInput();
+            // Si hay un mensaje de error, prevenimos el envío del formulario
+            if (document.getElementById('errorMensaje').textContent !== "") {
+                event.preventDefault();
+            }
+        });
+</script>
+<script>
+    function validadProvedor(){
+        let regexOne = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
+        let provedor = document.getElementById('provedor').value.trim();
+
+        if(regexOne.test(provedor)){
+            document.getElementById('errorMensajeProvedor').textContent = '';
+        }else{
+            document.getElementById('errorMensajeProvedor').textContent = 'Por favor, ingrese solo letras';
+        }
+    }
+    document.getElementById('miFormulario').addEventListener('submit',(e)=>{
+        validadProvedor();
+        if(document.getElementById('errorMensajeProvedor').textContent !== ""){
             e.preventDefault();
         }
     });

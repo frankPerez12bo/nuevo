@@ -1,3 +1,11 @@
+<?php include("../../../app/db.php");
+session_start();
+if($_SESSION['session_email']){
+    echo "bievenido : " .$_SESSION['session_email'];
+}else{
+    header("location:../../../index.php");
+}
+?>
 <?php include("../../../app/config.php");
 if (isset($_GET['txtId'])) {
     # code...
@@ -23,6 +31,9 @@ if (isset($_GET['txtId'])) {
 <hr>
 <section class="row container">
     <div class="card container">
+        <span class="fluid">
+            <h3><?php echo "bienvenido : ".$_SESSION['nombre']; ?></h3>
+        </span>
         <div class="card-header">
             <a
                 name=""
@@ -44,7 +55,8 @@ if (isset($_GET['txtId'])) {
                 >
                     <thead>
                         <tr>
-                            <th scope="col">Provedor:</th   >
+                            <th scope="col">Provedor:</th>
+                            <th scope="col">Producto:</th>
                             <th scope="col">Cantidad ingreso Inventario:</th>
                             <th scope="col">Precio Unidad Inventario:</th>
                             <th scope="col">Total Pagar:</th>
@@ -56,11 +68,12 @@ if (isset($_GET['txtId'])) {
                         <?php foreach ($provedores as $provedor){?>
                             <tr class="">
                                 <td><?php echo $provedor['provedor']."<br>"."ID: ".$provedor['id']; ?></td>
-                                <td><?php echo $provedor['cant_total_ingreso']."/unid"."<br>"."Producto".$provedor['producto']; ?></td>
+                                <td><?php echo $provedor['producto']; ?></td>
+                                <td><?php echo "Cantidad en Inventario : ".$provedor['cantidad_inventario']."<br>"."Ingreso a Inventario :   ".$provedor['cant_total_ingreso']."/unid"; ?></td>
 
                                 <td><?php echo $provedor['precio_unid_inven']." $"; ?></td>
                                 <td><?php echo $provedor['precio_total_inven']." $" ?></td>
-                                <td><?php $fecha = new DateTime(); echo $fecha->format('Y-m-d h:i:s'); ?></td>
+                                <td><?php date_default_timezone_set('America/lima'); $fecha = date('Y-m-d h:i:s'); echo $fecha; ?></td>
                                 <td>
                                     <a
                                         name=""

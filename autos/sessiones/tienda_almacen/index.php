@@ -1,3 +1,11 @@
+<?php include("../../app/db.php");
+session_start();
+if(isset($_SESSION['session_email'])){
+    echo "bienvenido".$_SESSION['session_email'];
+}else{
+    header("../../index.php");
+}
+?>
 <?php include("../../app/config.php");
 $sql = "SELECT * FROM `tb_libreria`WHERE 1";
 $sentencia = $pdo->prepare($sql);
@@ -9,6 +17,9 @@ $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 <span class="fluid text-center text-primary">
     <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0A5290;color:#FFEB05;">Tienda en Almacen</h5>
 </span>
+<!--<span class="fluid">
+    <h3 class="border border-1 border-warning py-1 bg-dark text-white">Bienvenido : <?php echo $_SESSION['nombre']; ?></h3>
+</span>-->
 <hr>
 <section class="fluid row border border-5 border-dark py-5" id="sectionMain">
 

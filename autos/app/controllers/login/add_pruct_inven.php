@@ -1,3 +1,11 @@
+<?php include("../../../app/db.php"); 
+session_start();
+if(isset($_SESSION['session_email'])){
+    echo "bienvenido".$_SESSION['session_email'];
+}else{
+    header('location:../../../index.php');
+}
+?>
 <?php include("../../../app/config.php");
     if (isset($_GET['txtId'])) {
         # code...
@@ -186,10 +194,11 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="producto" class="form-label">Nombre del Producto:</label>
+                        <!--<label for="producto" class="form-label">Nombre del Producto:</label>-->
                         <input
                             type="text"
                             readonly
+                            hidden
                             value="<?php echo $producto;?>"
                             class="form-control"
                             name="producto"
@@ -213,9 +222,10 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>
+                        <!--<label for="cantidad_inventario" class="form-label bg-success py-2"><b>Cantidad en Inventario</b></label>-->
                         <input
                             type="number"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -228,11 +238,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="cant_ingreso_inven" class="form-label bg-dark text-white"><b>Cantidad ingreso Productos/Inventario</b></label>
+                        <label for="cant_ingreso_inven" class="form-label bg-dark text-white py-2"><b>Cantidad ingreso Productos/Inventario</b></label>
                         <input
                             type="number"
-                            min="0"
-                            max="1000000"
+                            min="1"
+                            max="30"
                             value="<?php echo $cant_ingreso_inven;?>"
                             class="form-control"
                             name="cant_ingreso_inven"
@@ -242,9 +252,10 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_inven" class="form-label bg-dark text-white"><b>Precio Unidad Inventario</b></label>
+                        <!--<label for="precio_unid_inven" class="form-label bg-dark text-white"><b>Precio Unidad Inventario</b></label>-->
                         <input
                             step="0.01"
+                            hidden
                             type="number"
                             readonly
                             min="0"
@@ -258,10 +269,11 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="precio_unid_venta" class="form-label bg-dark text-white"><b>Precio Unidad Venta</b></label>
+                        <!--<label for="precio_unid_venta" class="form-label bg-dark text-white"><b>Precio Unidad Venta</b></label>-->
                         <input
                             step="0.01"
                             type="number"
+                            hidden
                             readonly
                             min="0"
                             max="1000000"
@@ -382,8 +394,27 @@
         </div>
         
     </article>
-    <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark py-5">
-
+    <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark py-5" style="background-color:rgba(0, 0,0,.5);">
+        <span class="fluid">
+            <h3><?php echo "Bienvenido : ".$_SESSION['nombre']; ?></h3>
+        </span>
+        <span class="text-center">
+            <h2 class="border border-1 border-dark py-2"style="letter-spacing:01vw;background-color:#0A5290;color:#FFEB05;"><?php echo $copy['producto']; ?></h2>
+        </span>
+        <section class="row fluid">
+            <article class="col-sm-7 col-md-7 col-lg-7 py-2">
+                <div class="card text-start">
+                    <img class="card-img-top" src="../../../public/archivos/imgenes/<?php echo $copy['figura']; ?>" alt="Title" />
+                    <div class="card-body">
+                        
+                        <p class="card-text"><?php echo "Cantidad : ".$copy['cantidad_inventario']."/unid"; ?></p>
+                        <p class="card-text"><?php echo "Precio Unidad Inventario : "."$".$copy['precio_unid_inven']; ?></p>
+                        <p class="card-text"><?php echo "Precio Unidad Venta : "."$".$copy['precio_unid_venta']; ?></p>
+                    </div>
+                </div>
+                
+            </article>
+        </section>
     </article>
 </section>
 <script>

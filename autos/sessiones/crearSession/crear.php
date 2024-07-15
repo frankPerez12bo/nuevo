@@ -43,8 +43,8 @@ if ($_POST) {
 ?>
 <?php include("../../temp/header.php"); ?>
 <link rel="stylesheet" href="../../public/css/crearSession.css">
-<span class="fluid text-center text-primary">
-    <h5 class="bg-dark py-4" style="letter-spacing: 01vw;">Crear Cuenta de Usuarios</h5>
+<span class="fluid text-center">
+    <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0a5290;color:#FFEB05;">Crear Cuenta de Usuarios</h5>
 </span>
 <section class="row">
     <article id="articleOne" class="col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 border border-4 border-dark py-5">
@@ -57,29 +57,33 @@ if ($_POST) {
             >Ver Registro</a
         >
         
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
+        <form action="" method="post" enctype="multipart/form-data" id="miFormulario">
+            <div class="mb-3 mt-5">
                 <label for="nombres" class="form-label"><b>Insertar nombres</b> </label>
                 <input
                     type="text"
                     class="form-control"
                     name="nombres"
                     id="nombres"
+                    oninput="validarNombre()"
                     aria-describedby="helpId"
                     placeholder="Insertar nombres"
                 />
             </div>
+            <span id="errorMensaje" class="bg-info"></span>
             <div class="mb-3">
-                <label for="email" class="form-label"><b>Gmail</b></label>
+                <label for="email" class="form-label mt-5"><b>Gmail</b></label>
                 <input
                     type="email"
                     class="form-control"
                     name="email"
                     id="email"
+                    oninput="validarGamail()"
                     aria-describedby="helpId"
                     placeholder="Gmail"
                 />
             </div>
+            <span id="errorMensaje" class="bg-info"></span>
             <div class="mb-3">
                 <label for="password_user" class="form-label"><b>Contraseña</b></label>
                 <input
@@ -157,8 +161,8 @@ if ($_POST) {
         if (email.length <= 12) {
             alert("el campo debe tener mas de 11 caracteres");
             e.preventDefault();
-        } else if(email.length >=40){
-            alert("maximo de caracteres 40 ,email innabilitado");
+        } else if(email.length >=37){
+            alert("maximo de caracteres 37 ,email innabilitado");
             e.preventDefault();
         }
 
@@ -171,5 +175,40 @@ if ($_POST) {
         }
     });
 </script>
+<script>
+    function validarGamail(){
+        let regex = /^[a-zA-Z0-9_$%+]+@(gmail|hotmail)\.(com|or|pe|mx|bol|arg)$/;
+        let email = document.getElementById('email').value.trim();
+        if(regex.test(email)){
+            document.getElementById('errorMensaje').textContent = "";
+        }else{
+            document.getElementById('errorMensaje').textContent = 'escriba un correo,los caracteres que se accepta( _ $ % + ). Luego la extencion disponibles(@hotmail,@gmail.com ó or,pe,mx,bol,arg)';
+        }
+    }
 
-    
+    document.getElementById('miFormulario').addEventListener('submit',(e)=>{
+        validarGamail();
+        if(document.getElementById.textContent !== ""){
+            //e.preventDefault();
+        }
+    });
+</script>
+<script>
+    function validarNombre(){
+        let regex = /^[A-Za-z]+(\s[A-Za-z]+){2}$/;
+        let nombres = document.getElementById("nombres").value.trim();
+
+        if(regex.test(nombres)){
+            document.getElementById('errorMensaje').textContent = '';
+        }else{
+            document.getElementById('errorMensaje').textContent = 'solo se acepta letras un nombre ,dos alias';
+        }
+
+        document.getElementById('miFormulario').addEventListener('submit',(e)=>{
+            validarNombre();
+            if(document.getElementById('errorMensaje').textContent !== ""){
+                e.preventDefault();
+            }
+        });
+    }
+</script>
