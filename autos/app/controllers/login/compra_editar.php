@@ -185,6 +185,8 @@ if ($_POST) {
 }
 ?>
 <?php include("../../../temp/header.php"); ?>
+<link rel="stylesheet" href="../../../public/css/movil.css">
+<link rel="stylesheet" href="../../../public/css/disegImage.css">
 <span class="fluid text-center text-primary">
     <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0A5290;color:#FFEB05;">Hacer Compra</h5>
 </span>
@@ -422,6 +424,17 @@ if ($_POST) {
                             placeholder="Fecha de Compra"
                         />
                     </div>
+                    <hr>
+                    <div class="fluid" id="card-<?php echo $precio_unid_venta;?>">
+                        <script>
+                            var precio_unid_venta = <?php echo "Precio".$precio_unid_venta;?>
+                            document.write(precio_unid_venta);
+                        </script>
+                    </div>
+                    <div class="spaceCal" id="spaceCal">
+
+                    </div>
+                    <hr>
                     <button
                         type="submit"
                         class="btn btn-success"
@@ -434,7 +447,7 @@ if ($_POST) {
         </div>
         
     </article>
-    <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark py-5" style="background-color:rgba(0, 0, 0, .4)">
+    <article class="col-sm-8 col-md-8 col-lg-8 border border-3 border-dark py-5" style="background-color:rgba(0, 0, 0, .4);overflow: hidden;">
         <h3>Bienvenido : <?php echo $_SESSION['nombre'];?></h3>
         <span class="text-center"><h2 class="border border-1 border-dark py-2" style="letter-spacing:01vw;text-shadow: 0px 04px 07px beige;background-color:#0A5290;color:#FFEB05;"><?php echo $copy['producto'];?></h2></span>
         <section class="row">
@@ -447,12 +460,32 @@ if ($_POST) {
                         <p class="card-text"><?php echo "Precio Unidad Venta : "."$".$copy['precio_unid_venta'];?></p>
                     </div>
                 </div>
-                
+            </article>
+            <article class="col-sm-5 col-md-5col-lg-5 border border-1 border-dark" style="" id="articleTt">
+                <center>
+                    <div class="space border border-1 border-dark" id="space">
+                        <img src="https://assets.playgroundai.com/babc5ee8-89ad-433b-b27f-14d44b5dfdbb.jpg" alt=""class="imgSec">
+                        <img src="https://images.playground.com/6fc469529f0c4ba5b829108c1ea98aa2.jpeg" alt=""class="imgSec">
+                        <img src="https://images.playground.com/d3c74b2a63284371af0ff0272ce28e8e.jpeg" alt=""class="imgSec">
+                    </div>
+                </center>
             </article>
         </section>        
     </article>
 </section>
 <?php include("../../../temp/footer.php"); ?>
+<script>
+    let cantidad_comprar = document.getElementById('cantidad_comprar').value.trim();
+    cantidad_comprar.addEventListener('input', ()=>{
+        let cartElenet = document.getElementById('card-<?php echo $precio_unid_venta;?>').value;
+        let carId = cartElenet.id.split('-')[1]; // Extrae el valor numérico del id
+        document.write(cartElenet);
+        let spaceCal =  document.getElementById('spaceCal');
+        spaceCal.innerHTML = `
+            <p>Precio: ${cartElenet} </p>
+        `;
+    });
+</script>
 <script>
     document.querySelector('form').addEventListener('submit',(e)=>{
         let cliente = document.getElementById('cliente').value.trim();
@@ -462,7 +495,7 @@ if ($_POST) {
         if (cliente == '' || cantidad_comprar == '' || efectivo_pagar == '') {
             alert("rellene el campo usuario y cantidad a comprar y efectivo a pagar.");
             e.preventDefault();
-        }
+  }
     });
 </script>
 <script>

@@ -25,6 +25,7 @@ if (isset($_GET['txtId'])) {
     $provedores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?php include("../../../temp/header.php"); ?>
+<link rel="stylesheet" href="../../../public/css/movil.css">
 <span class="fluid text-center text-primary">
     <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0A5290;color:#F9EF31;">Historial Ingreso Productos/Inventario</h5>
 </span>

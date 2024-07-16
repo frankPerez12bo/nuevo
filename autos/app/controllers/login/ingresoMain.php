@@ -32,6 +32,7 @@ $ventas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include("../../../temp/header.php"); ?>
 <link rel="stylesheet" href="../../../public/css/ingresoMain.css">
+<link rel="stylesheet" href="../../../public/css/movil.css">
 <div class="fluid py-2" id="ingresoMain">
     <section class="row">
         <article class="col-sm-4 col-md-4 col-lg-4 border border-3 border-dark pt-3" id="articleOne">

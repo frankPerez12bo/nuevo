@@ -43,6 +43,7 @@ if ($_POST) {
 ?>
 <?php include("../../temp/header.php"); ?>
 <link rel="stylesheet" href="../../public/css/crearSession.css">
+<link rel="stylesheet" href="../../public/css/movil.css">
 <span class="fluid text-center">
     <h5 class="py-4" style="letter-spacing: 01vw;background-color:#0a5290;color:#FFEB05;">Crear Cuenta de Usuarios</h5>
 </span>
@@ -74,7 +75,7 @@ if ($_POST) {
             <div class="mb-3">
                 <label for="email" class="form-label mt-5"><b>Gmail</b></label>
                 <input
-                    type="email"
+                    type="text"
                     class="form-control"
                     name="email"
                     id="email"
@@ -177,7 +178,7 @@ if ($_POST) {
 </script>
 <script>
     function validarGamail(){
-        let regex = /^[a-zA-Z0-9_$%+]+@(gmail|hotmail)\.(com|or|pe|mx|bol|arg)$/;
+        let regex = /^[a-zA-ZñÑ0-9_$%+]+@(gmail|hotmail)\.(com|or|pe|mx|bol|arg)$/;
         let email = document.getElementById('email').value.trim();
         if(regex.test(email)){
             document.getElementById('errorMensaje').textContent = "";
@@ -195,7 +196,7 @@ if ($_POST) {
 </script>
 <script>
     function validarNombre(){
-        let regex = /^[A-Za-z]+(\s[A-Za-z]+){2}$/;
+        let regex = /^[A-Za-zÑñ]+(\s[A-Za-zñÑ]+){2}$/;
         let nombres = document.getElementById("nombres").value.trim();
 
         if(regex.test(nombres)){

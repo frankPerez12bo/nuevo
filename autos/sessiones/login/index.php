@@ -2,6 +2,7 @@
 <?php include("../../temp/header.php"); ?>
     <link rel="stylesheet" href="../../public/css/login.css">
     <link rel="stylesheet" href="../../public/css/animacion_one.css">
+    <link rel="stylesheet" href="../../public/css/movil.css">
     <span class="fluid text-center">
             <h5 class="py-4" style="letter-spacing: 01vw;background-color: #0A5290;color:#FFEB05;">Iniciar Session</h5>
         </span>

@@ -74,6 +74,7 @@ if($_POST){
 }
 ?>
 <?php include("../../../temp/header.php"); ?>
+<link rel="stylesheet" href="../../../public/css/movil.css">
     <span class="fluid text-center text-primary">
             <h5 class="bg-dark py-4" style="letter-spacing: 01vw;">Agregar Producto</h5>
     </span>

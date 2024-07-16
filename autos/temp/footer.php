@@ -1,10 +1,32 @@
-
 </main>
-        <footer class="mt-0 text-warning py-4 text-center border border-4 border-success" style="letter-spacing: 01vw;background-color:#0A5290;font-weight: bold;">
+        <footer class="mt-0 text-warning py-1 text-center border border-4 border-success" style="letter-spacing: 01vw;background-color:#0A5290;font-weight: bold;">
             <!-- place footer here -->
             <span class="fluid" id="textFooter">
-                <h4 class="" style="">FOOTER</h4>
+                <h4 class="" style="">Marcas Autorizadas</h4>
             </span>
+            <span class="border border-2 border-dark" id="footerOne" style="">
+                    <marquee behavior="" direction="">
+                        <img src="https://images.playground.com/6b3f06a9bbcb4114a9433f332f127057.jpeg" alt="" class="img">
+                    </marquee>
+                    <marquee behavior="" direction="">
+                        <img src="https://1.bp.blogspot.com/-G85ndCjObcE/UNmzWjCiSYI/AAAAAAAAGyw/2cH7SMCdQX0/s1600/Mitsubishi+Logo+2.jpg" alt="" class="img">
+                    </marquee>
+                    <marquee behavior="" direction="">
+                        <img src="https://images.playground.com/4f362605f3be41d7b2d8d421f514cacf.jpeg" alt="" class="img">
+                    </marquee>
+                    <marquee behavior="" direction="">
+                        <img src="https://tse2.explicit.bing.net/th?id=OIP.7xWJkTEMjrr5gVslBPdaHQHaFj&pid=Api&P=0&h=180" alt="" class="img">
+                    </marquee>
+                    <marquee behavior="" direction="">
+                        <img src="https://static.vecteezy.com/system/resources/previews/019/136/341/non_2x/audi-logo-audi-icon-free-free-vector.jpg" alt="" class="img">
+                    </marquee>
+                    <marquee behavior="" direction="">
+                        <img src="http://img3.wikia.nocookie.net/__cb20100627185703/logopedia/images/a/ae/Kia_logo.png" alt="" class="img">
+                    </marquee>
+                    <marquee behavior="" direction="">
+                        <img src="https://wallpapercave.com/wp/wp3072191.jpg" alt="" class="img">
+                    </marquee>
+                </span>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script
