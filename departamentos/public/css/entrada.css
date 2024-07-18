@@ -1,0 +1,71 @@
+*{
+    background-color:transparent;
+}
+#textFooter{
+    transition:2100ms ease-out;
+}
+#textFooter:hover h4{
+    color: beige;
+    cursor: pointer;
+    transition:1800ms;
+    transform: translate3d(/* stylelint-disable-line rule */);
+}
+#template_main{
+    opacity: 100%;
+    border: 2px solid slateblue;
+    background-image:url("https://tse4.mm.bing.net/th?id=OIP.aejqX6dO_OtIAtujJJPAQQHaHt&pid=Api&P=0&h=180");
+    transition: ease-in 1000ms;
+    overflow:cover;
+    height: 80vh;
+    background-size: cover;
+    box-sizing: border-box;
+    animation: imageOne 105s linear infinite alternate;
+}
+#template_main:hover{
+    transition: ease-in 1000ms;
+    filter: brightness(110%);
+    animation-play-state: paused;
+}
+#template_main h1{
+    opacity: 75%;
+    letter-spacing: .7vw;
+}
+#template_main p{
+    opacity:50%;
+}
+@keyframes imageOne {
+    0%{
+        background-size: cover; 
+        background-image:url("https://tse4.mm.bing.net/th?id=OIP.aejqX6dO_OtIAtujJJPAQQHaHt&pid=Api&P=0&h=180");
+    }
+    20%{
+        background-size: cover;
+        background-image: url("https://i0.wp.com/www.balamgroup.com.mx/wp-content/uploads/2021/01/Elemental-Home-Departamento-en-Venta-Merida_render-fachada-edificio.jpg");
+    }
+    50%{
+        background-size: cover; 
+        background-image: url("https://images.playground.com/f472f6d82b0244d6aacf5e640d7fb71e.jpeg");
+    }
+    80%{
+        background-size: cover;
+        background-image: url("https://images.playground.com/e95dc0a32ff3412ba380212581a6857f.jpeg");
+    }
+}
+body{
+    background-color: rgba(0, 0, 0, .7);
+}
+#footerOne{
+    display: flex;
+    width: 500vw;
+    gap: 01vw;
+    margin-left: .5vw;
+    background-attachment: fixed;
+    background-color: #000421;
+    padding: 02vh 0.5vw;
+}
+#footerOne ,img{
+    max-width: 99%;
+    max-height: 100%;
+    height: 120px;
+    border:solid 3px;
+}

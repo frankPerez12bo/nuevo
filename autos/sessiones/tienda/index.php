@@ -14,8 +14,14 @@
     <article class="container col-sm-8 col-ms-4 col-lg-8 border border-8 border-dark pt-5" id="space" style="display: grid;grid-template-columns:1fr 1fr 1fr;gap:01vw;">
 
     </article>
+    <h2>Carrito de Compras</h2>
+    <div id="carrito"></div>
+    <p id="total"></p>
+    <button id="pagar" onclick="pagar()">Pagar</button>
+
 </section>
 </body>
 <?php include("../../temp/footer.php"); ?>
-<script src="../../public/js/app.js"></script>
-<script src="../../public/js/datos.js"></script>
+<script src="../../public/js/appCarrito.js"></script>
+<script src="../../public/js/data.js"></script>
+<script src="../../public/js/carrito.js"></script>

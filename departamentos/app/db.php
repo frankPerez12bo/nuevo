@@ -2,9 +2,9 @@
 $host = 'localhost';
 $user = 'root';
 $password = '';
-$dbname = 'carros';
+$dbname = 'depas';
 
-$conexion = mysqli_connect('localhost','root','','carros');
+$conexion = mysqli_connect('localhost','root','','depas');
 $fecha =  new DateTime();
 if ($conexion->error) {
     # code...

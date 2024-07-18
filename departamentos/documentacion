@@ -1,0 +1,63 @@
+REALIZAR UN SISTEMA DE VENTAS DE LIBRERÍA 
+
+INDICE
+
+1.-  Introducción
+2.-  Descripción del sistema
+3.-  Análisis de requerimientos
+4.-  Diseño del sistema
+5.-  Conclusión
+
+INTRODUCCIÓN 
+PROPOSITO
+El propósito de este documento es proporcionar una guía detallada del análisis y diseño de un sistema de ventas para una biblioteca, así como la implementación y pruebas unitarias del mismo.
+ALCANCE
+Este sistema permitirá a la biblioteca gestionar la venta de libros, incluyendo el manejo de inventario, la emisión de facturas y la generación de reportes de ventas.
+
+DESCRIPCIÓN DEL SISTEMA
+El sistema de ventas de la biblioteca incluye las siguientes funcionalidades principales:
+  Gestión de libros (agregar, editar, eliminar libros del inventario)
+  Registro de ventas
+  Gestión de clientes
+  Emisión de facturas
+  Generación de reportes de ventas 
+
+
+
+ANALISIS DE REQUERIMIENTOS
+Requerimientos funcionales:
+1.	Gestión de libros:
+o	El usuario debe poder agregar nuevos libros al inventario.
+o	El usuario debe poder editar la información de los libros existentes.
+o	El usuario debe poder eliminar libros del inventario.
+o	El sistema debe permitir buscar libros por título, autor o ISBN.
+2.	Registro de ventas:
+o	El usuario debe poder registrar una venta de uno o más libros.
+o	El sistema debe actualizar el inventario tras una venta.
+3.	Gestión de clientes:
+o	El usuario debe poder agregar nuevos clientes.
+o	El usuario debe poder editar la información de los clientes existentes.
+o	El usuario debe poder eliminar clientes.
+4.	Emisión de facturas:
+o	El sistema debe generar una factura detallada para cada venta.
+5.	Generación de reportes:
+o	El sistema debe generar reportes de ventas por día, semana, mes y año.
+o	El sistema debe permitir exportar reportes en formatos CSV y PDF.
+Requerimientos no funcionales:
+1.	Usabilidad:
+o	El sistema debe tener una interfaz amigable y fácil de usar.
+2.	Rendimiento:
+o	El sistema debe ser capaz de manejar múltiples transacciones de venta simultáneamente.
+3.	Seguridad:
+o	El sistema debe proteger la información de los clientes y transacciones mediante cifrado.
+
+
+
+
+
+
+
+
+DISEÑO DEL SISTEMA
+Arquitectura: 
+El sistema sigue una arquitectura cliente-servidor. El cliente es una interfaz web interactiva, mientras que el servidor maneja la lógica de negocio y la base de datos.

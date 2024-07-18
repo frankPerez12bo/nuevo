@@ -1,0 +1,28 @@
+#space{
+    overflow: hidden;
+    width: 98%;
+    height: 60vh;
+    display: flex;
+}
+#space .imgSec{
+    width: 114.5px;
+    height: 90vh;
+    max-width: 100%;
+    flex-grow: 1;
+    transition: 900ms;
+    filter: brightness(98%);
+}
+#space .imgSec:hover{
+   
+    flex-grow: 0;
+    width: 350px;
+    background-size: cover;
+    cursor: crosshair;
+    transition: 1000ms;
+    filter: brightness(150%);
+}
+#articleTt{
+    background-color: black;
+    margin-top: 0.5vh;
+    padding-top:05vh;
+}
