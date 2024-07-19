@@ -78,7 +78,7 @@ if($_POST){
                                 oninput=""
                             />
                         </div>
-                        <div class="mb-3">
+                        <!--<div class="mb-3">
                             <label for="almacen" class="form-label">Almacen</label>
                             <select
                                 class="form-select form-select-lg"
@@ -90,7 +90,7 @@ if($_POST){
                                 <option value="">Lima</option>
                                 <option value="">Ayacucho</option>
                             </select>
-                        </div>
+                        </div>-->
                         
                         <button
                             type="submit"

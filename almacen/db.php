@@ -2,7 +2,7 @@
 define('HOST','localhost');
 define('USER','root');
 define('PASSWORD','');
-define('DB','ventas_tienda');
+define("DB","ventas_tienda'");
 
 $servidor = "mysql:dbname=".DB.";host=".HOST;
 
