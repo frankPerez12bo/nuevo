@@ -106,7 +106,7 @@ if($_POST){
                             placeholder="Nombre del Producto:"
                         />
                     </div>
-                    <span id="errorMensaje" class="bg-danger py-2" style="opacity: 95%;"><p class=""></p></span>
+                    <span id="errorMensaje" class="bg-info" style="opacity: 95%;"><p class=""></p></span>
                     
                     <div class="mb-3 mt-5">
                         <label for="provedor" class="form-label bg-success py-2"><b>Provedor:</b></label>
@@ -120,7 +120,7 @@ if($_POST){
                             placeholder="Provedor:"
                         />
                     </div>
-                    <span class="errorMensaje" id="errorMensajeProvedor" style="background-color:crimson;"></span>
+                    <span class="bg-info" id="errorMensajeProvedor" style=""></span>
                     <div class="mb-3">
                         <label for="figura" class="form-label bg-success py-2"><b>Insertar Imagen</b></label>
                         <input

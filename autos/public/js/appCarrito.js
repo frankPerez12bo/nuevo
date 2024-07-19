@@ -27,6 +27,7 @@ function  mostrarDatos(productos) {
                 <button class="btn btn-warning mt-2" onclick="agregarAlCarrito(${producto.nombre} , ${producto.precio} )">Agregar al Carrito</button>
             </div>
         </div>
+        <script src="carrito.js"></script>
         `;
         space.appendChild(elemts);    
     });

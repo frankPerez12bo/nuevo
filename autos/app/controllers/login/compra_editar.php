@@ -112,6 +112,7 @@ if ($_POST) {
     $cant_comprar_bifor = (isset($_POST['cant_comprar_bifor'])? $_POST['cant_comprar_bifor']: '');
     $cliente = (isset($_POST['cliente'])? $_POST['cliente']: '');
     $efectivo_pagar = (isset($_POST['efectivo_pagar'])? $_POST['efectivo_pagar']: '');
+    $igv = (isset($_POST['igv'])? $_POST['igv']: '');
     $cliente_bifor = $copy['cliente'];
     $vuelto = $efectivo_pagar - $result_precio_total_venta;
     
@@ -144,7 +145,8 @@ if ($_POST) {
             cant_comprada=:cant_comprada,
             precio_all_vBifor=:precio_all_vBifor,
             efectivo_bifor=:efectivo_bifor,
-            vuelto_bifor=:vuelto_bifor
+            vuelto_bifor=:vuelto_bifor,
+            igv=:igv
             WHERE id=:id";
     $sentencia = $pdo->prepare($sql);
 
@@ -176,8 +178,8 @@ if ($_POST) {
     $sentencia->bindParam(':cant_comprada',$cant_comprada);
     $sentencia->bindParam(':precio_all_vBifor',$precio_all_vBifor);
     $sentencia->bindParam(':efectivo_bifor',$efectivo_bifor);
-    $sentencia->bindParam(':vuelto_bifor',$vuelto_bifor
-);
+    $sentencia->bindParam(':vuelto_bifor',$vuelto_bifor);
+    $sentencia->bindParam(':igv',$igv);
 
     $sentencia->execute();
     header("location:ingresoMain.php");
@@ -344,6 +346,8 @@ if ($_POST) {
                     </div>
                     <label for="total">Precio total:</label>
                     <input type="number" id="total" value="0" step="0.01" readonly><br> <!-- Campo de entrada para mostrar el precio total, de solo lectura -->
+                    <label for="igb">Importe IGB:</label>
+                    <input type="number" id="igb" name="igv" value="0" step="0.01" readonly><br> <!-- Campo de entrada para mostrar el precio total, de solo lectura -->
 
                     <!--<label for="payment">Pago en efectivo:</label>
                     <input type="number" id="payment" min="0" step="0.01"><br> <!-- Campo de entrada para el pago en efectivo, con un mínimo de 0 -->
@@ -530,29 +534,42 @@ if ($_POST) {
     });
 </script>
 <script>
+
 document.addEventListener("DOMContentLoaded", function(e) {
-    //precio del Producto
+    // Precio del producto
     const priceInput = document.getElementById('price');
-    //cantidad a comprar desde le formulario
+    // Cantidad a comprar desde el formulario
     const quantityInput = document.getElementById('cantidad_comprar');
-    //aqui vamos ejecutar la operacion total a pagar por eso llamamos su id total renember fain
+    // ID del total a pagar
     const totalInput = document.getElementById('total');
-    //este is the is of efect pay of form 
+    // ID del campo de efectivo para pagar
     const paymentInput = document.getElementById('efectivo_pagar');
-    //od of span where vamos send off mesagge
+    // ID del span donde se mostrará el mensaje
     const message = document.getElementById('message');
+    // ID del campo donde se mostrará el IGV
+    const inputIgv = document.getElementById('igb');
 
     // Obtener el precio del producto desde el campo de precio
     const productPrice = parseFloat(priceInput.value);
 
     // Función para calcular el precio total
     function calculateTotal() {
-        //obtener el valor de la cantidad in the place
+        // Obtener el valor de la cantidad desde el campo
         const quantity = parseFloat(quantityInput.value) || 0;
-        //realizamos la operacion in the place
-        const total = productPrice * quantity;  
-        //in the place round of value of id
+        // Realizamos la operación para obtener el total
+        const total = productPrice * quantity;
+        // Actualizamos el campo del total con el valor calculado
         totalInput.value = total.toFixed(2);
+        // Calculamos el IGV
+        calculateIgv(total);
+    }
+
+    // Función para calcular el IGV
+    function calculateIgv(total) {
+        // Calculamos el 18% del total
+        const igv = total * 0.18;
+        // Actualizamos el campo del IGV con el valor calculado
+        inputIgv.value = igv.toFixed(2);
     }
 
     // Función para validar el pago
@@ -579,7 +596,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
     paymentInput.addEventListener('input', function() {
         validatePayment();
     });
+
+    // Inicializar los valores al cargar la página
+    calculateTotal();
 });
+
 
 </script>
 <script>

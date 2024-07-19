@@ -61,6 +61,7 @@ if (isset($_GET['txtId'])) {
                 <p class="card-text" ><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Precio Unidad V: <b><?php echo "$".$cliente['precio_unid_venta'];?></b></p></p>
                 <p class="card-text" ><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Efectivo Ejecutado : <b><?php echo "$".$cliente['efectivo_bifor']."<br>"."Monto Total : "."$".$cliente['precio_all_vBifor']."<br>"."Vuelto : "."$".$cliente['vuelto_bifor'];?></b></p></p>
                 <p class="card-text" ><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Cantidad  Comprada : <b><?php echo $cliente['cant_comprada']."/unid";?></b></p></p>
+                <p class="card-text" ><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Importe del IGB : <b><?php echo "$".$cliente['igv'];?></b></p></p>
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Fecha : <b><?php date_default_timezone_set('America/Lima'); echo date('Y-m-d h:i:s'); ?></b></p></p>
                     <a
             name=""
@@ -86,6 +87,7 @@ if (isset($_GET['txtId'])) {
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Precio Unidad : <b><?php echo $cliente['precio_unid_venta']."$";?></b></p></p>
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Total pagado : <b><?php echo "Efectivo Pagado :"."$".$cliente['efectivo_pagar']."<br>"."Monto del Producto : "."$".$cliente['precio_total_venta']."<br>"."Cantidad Comprada: ".$cliente['cant_comprar_bifor'];?></b></p></p>
                 <p class="card-text"><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Fecha : <b><?php date_default_timezone_set('America/Lima'); echo date('Y-m-d h:i:s'); ?></b></p></p>
+                <p class="card-text" ><p class="py-3 text-center" style="background-color:rgba(0, 0, 0, .5);color:#fff;">Importe del IGB : <b><?php echo "$".$cliente['igv'];?></b></p></p>
                 <p class="card-text"><p class="py-3" style="background-color:rgba(0, 0, 0, .5);color:#fff">Vuelto : <b><?php echo "$".$cliente['vuelto']; ?></b> </p></p>
                 <a
         name=""

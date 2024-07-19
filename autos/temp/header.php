@@ -49,6 +49,9 @@
                         <a style="color: #FFEB05;" class="nav-link" href="<?php echo $url_base; ?>sessiones/tienda/index.php"><b>Tienda</b></a>
                     </li>
                     <li class="nav-item">
+                        <a style="color: #FFEB05;" class="nav-link" href="<?php echo $url_base; ?>sessiones/tiendaTwo/index.php"><b>Tienda Two</b></a>
+                    </li>
+                    <li class="nav-item">
                         <a style="color: #FFEB05;" class="nav-link" href="<?php echo $url_base; ?>sessiones/login/index.php"><b>Iniciar Session</b></a>
                     </li>
                     <li class="nav-item">
