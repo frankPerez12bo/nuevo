@@ -1,4 +1,13 @@
-<?php include('../../../config/config.php'); 
+<?php include('../../../config/config.php');
+
+    if(isset($_GET['txtId'])){
+        print_r($_GET['txtId']);
+        $txtId = $_GET['txtId'];
+        $sql = "DELETE FROM tbl_login WHERE id_usuario = :txtId";
+        $sentencia = $pdo->prepare($sql);
+        $sentencia->bindParam(':txtId', $txtId);
+        $sentencia->execute();
+    }
     $sql = "SELECT * FROM tbl_login WHERE 1";
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute();
@@ -55,9 +64,17 @@
                                                 name=""
                                                 id=""
                                                 class="btn btn-danger"
-                                                href="#"
+                                                href="javascript:limpiar(<?php echo $credencial['id_usuario'];?>)"
                                                 role="button"
                                                 >Eliminar</a
+                                            >
+                                            <a
+                                                name=""
+                                                id=""
+                                                class="btn btn-primary"
+                                                href="editar.php?txtId=<?php echo $credencial['id_usuario'] ?>"
+                                                role="button"
+                                                ><b>EDITAR</b></a
                                             >
                                             
                                         </td>
@@ -74,3 +91,12 @@
     </article>
 </section>
 <?php include('../../../tem/footer.php'); ?>
+<script>
+    function limpiar(id_usuario){
+        let confirmacion = confirm('estas seguro que deseas eliminar esto .........');
+
+        if(confirmacion){
+            window.location.href = 'tabla.php?txtId='+ id_usuario;
+        }
+    }
+</script>
