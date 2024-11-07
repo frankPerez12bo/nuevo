@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>alert('Credenciales incorrectas.');</script>";
     }
 }
+
+$url_main = 'http://localhost/new_votacion/';
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand navbar-light bg-dark">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active text-light" href="<?php echo $url_main;?>" aria-current="page"
+                        ><b>HOME</b><span class="visually-hidden">(current)</span></a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="register.php">Crear Cuentas</a>
+                </li>
+            </ul>
+        </nav>
+        
+    </header>
     <div class="container mt-5">
         <h2 class="text-center">Inicio de Sesión</h2>
         <form method="POST" class="mx-auto" style="max-width: 400px;">
