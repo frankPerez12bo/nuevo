@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptar y Desencriptar Texto</title>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #58a6ff;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 2s;
+        }
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            background-color: #161b22;
+            box-shadow: 0px 0px 10px 2px rgba(88, 166, 255, 0.3);
+            animation: slideIn 1.5s;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-column {
+            flex: 1;
+            margin-right: 15px;
+        }
+        .form-column:last-child {
+            margin-right: 0;
+        }
+        input {
+            margin-bottom: 15px;
+        }
+        button {
+            margin-right: 10px;
+            animation: buttonHover 2s infinite alternate;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #58a6ff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes buttonHover {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Encriptar y Desencriptar Texto</h1>
+    <form id="cryptoForm" class="needs-validation" novalidate>
+        <div class="form-row">
+            <div class="form-column">
+                <div class="mb-3">
+                    <label for="text" class="form-label">Nombres:</label>
+                    <input type="text" id="text" name="text" class="form-control" placeholder="Introduce texto o texto encriptado" required>
+                    <div class="invalid-feedback">Por favor, introduce un nombre válido.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellidos:</label>
+                    <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Introduce texto o texto encriptado" required>
+                    <div class="invalid-feedback">Por favor, introduce un apellido válido.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="secret" class="form-label">Clave secreta:</label>
+                    <input type="password" id="secret" name="secret" class="form-control" placeholder="Clave para encriptar/desencriptar" required>
+                    <div class="invalid-feedback">Por favor, introduce una clave secreta.</div>
+                </div>
+            </div>
+            <div class="form-column">
+                <div class="d-flex flex-column justify-content-center">
+                    <button type="button" id="encryptButton" class="btn btn-primary mb-3">Encriptar</button>
+                    <button type="button" id="decryptButton" class="btn btn-success">Desencriptar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <h2>Resultado:</h2>
+    <p id="result" class="text-center"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
