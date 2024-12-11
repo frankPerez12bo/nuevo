@@ -46,8 +46,7 @@ $result = $conn->query($query);
                     <td>
                         <a href="editar.php?id=<?php echo $row['Mat_alumno']; ?>" class="btn btn-warning">Editar</a>
                         <a href="eliminar.php?id=<?php echo $row['Mat_alumno']; ?>" class="btn btn-danger"
-       onclick="return confirm('¿Está seguro de que desea eliminar este registro?');">
-       Eliminar
+onclick="return confirm('¿Está seguro de que desea eliminar este registro?');">Eliminar
     </a>
                     </td>
                 </tr>
