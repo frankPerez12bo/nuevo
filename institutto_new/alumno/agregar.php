@@ -26,14 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="container mt-4">
     <h1 class="text-center">Agregar Alumno</h1>
-    <form method="POST">
+    <form id="formulario" method="POST">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" required>
+            <input oninput="validarNombre()" type="text" name="nombre" id="nombre" class="form-control" required>
+            <span id="span_nombre"></span>
         </div>
         <div class="mb-3">
             <label for="edad" class="form-label">Edad:</label>
-            <input type="number" name="edad" id="edad" class="form-control" required>
+            <input type="number" name="edad" id="edad" class="form-control" min="12" max="50" required>
         </div>
         <div class="mb-3">
             <label for="semestre" class="form-label">Semestre:</label>
@@ -50,5 +51,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="listar.php" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+<script>
+    function validarNombre() {
+        const nombre = document.getElementById('nombre').value.trim();
+        const span_nombre = document.getElementById('span_nombre');
+        const regex = /^[A-ZÑ][a-zñ]+( [A-ZÑ][a-zñ]+){2,3}$/;
+
+        if(regex.test(nombre)){
+            span_nombre.textContent = 'Nombre Valido';
+            span_nombre.style.color = 'blue';
+        }else{
+            span_nombre.textContent = 'Nombre Inválido';
+            span_nombre.style.color = 'crimson';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded',function()
+        {
+            nombreValidado = validarNombre();
+            const formulario = document.getElementById('formulario');
+            formulario.addEventListener('submit', function(e){
+                if(!nombreValidado){
+                    e.preventDefault();
+                }
+            });
+        });
+    documen.getElementById('nombre').addEventListener('submit',validarNombre);
+</script>
 </body>
 </html>
