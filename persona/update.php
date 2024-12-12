@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <form id="formulario" action="update.php?id=<?php echo $row['id_persona']; ?>" method="POST">
         <div class="mb-3">
-            <label for="nombres_persona" class="form-label">Nombre</label>
+            <label for="nombres_persona" class="form-label">Nombres:</label>
             <input oninput="validarNombres()" type="text" class="form-control" id="nombres_persona" name="nombres_persona" value="<?php echo $row['nombres_persona']; ?>" required>
             <span id="span_nombres"></span>
         </div>

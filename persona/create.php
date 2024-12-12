@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function validarDni(){
         const dni_persona = document.getElementById("dni_persona").value.trim();
         const span_dni = document.getElementById("span_dni");
-        const regex = /^\d{8}$/;
+        const regex =/^(?!000)\d{8}$/;
 
         if(regex.test(dni_persona)){
             span_dni.textContent = 'dni valido';
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function validarClave() {
         const codigo_persona = document.getElementById("codigo_persona").value.trim();
         const span_clave = document.getElementById("span_clave");
-        const regex = /^[0-9]$/; // Expresión regular para solo números de 4 a 10 dígitos
+        const regex =/^\d+$/; // Expresión regular para solo números de 4 a 10 dígitos
 
         if (regex.test(codigo_persona)) {
             span_clave.textContent = 'Clave válida.';
